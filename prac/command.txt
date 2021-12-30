@@ -1,0 +1,3 @@
+LOAD mapdata.txt
+UPDATE
+DIJKSTRA 4 1

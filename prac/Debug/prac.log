@@ -1,0 +1,27 @@
+﻿  Manager.cpp
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(467,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(468,27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(541,75): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(542,76): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(555,75): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(556,76): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(595,75): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(596,80): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(609,75): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(610,80): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(651,75): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(652,80): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(665,75): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(666,80): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(816,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(826,23): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(829,27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(831,39): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(846,41): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(865,30): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\MinHeap.h(48,6): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\MinHeap.h(42): message : 클래스 템플릿 멤버 함수 'void MinHeap<int,int>::Pop(void)'을(를) 컴파일하는 중입니다.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(715): message : 컴파일되는 함수 템플릿 인스턴스화 'void MinHeap<int,int>::Pop(void)'에 대한 참조를 확인하세요.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\Manager.cpp(712): message : 컴파일되는 클래스 템플릿 인스턴스화 'MinHeap<int,int>'에 대한 참조를 확인하세요.
+C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\prac\MinHeap.h(50,27): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+  prac.vcxproj -> C:\Users\Kim Taekgeon\OneDrive\바탕 화면\prac\Debug\prac.exe
