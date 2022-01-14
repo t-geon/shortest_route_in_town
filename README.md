@@ -57,23 +57,20 @@ for문 3개를 통해 반복하면서 현재 저장되어 있는 값과 중간 �
 
 위와 같은 그래프가 있다면
 
-0 4 -1 8
-INF 0 -2 -10
+0	4	-1	8 /
+INF	0	-2	-10 /
+INF	INF	0	3 /
+INF	INF	INF	0 /   -> 초기화를 한번 돌 때
 
-0	4	-1	8
-INF	0	-2	-10
-INF	INF	0	3
-INF	INF	INF	0   -> 초기화를 한번 돌 때
+0	4	-1	-6 /
+INF	0	-2	-10 /
+INF	INF	0	3 /
+INF	INF	INF	0 /  -> 가장 큰 반복문을 2번 돌았을 때
 
-0	4	-1	-6
-INF	0	-2	-10
-INF	INF	0	3
-INF	INF	INF	0   -> 가장 큰 반복문을 2번 돌았을 때
-
-0	4	-1	-6
-INF	0	-2	-10
-INF	INF	0	3
-INF	INF	INF	0   -> 가장 큰 반복문을 3번 돌았을 때
+0	4	-1	-6 /
+INF	0	-2	-10 /
+INF	INF	0	3 /
+INF	INF	INF	0 /   -> 가장 큰 반복문을 3번 돌았을 때
 
 
 2. Rabin-Karp
