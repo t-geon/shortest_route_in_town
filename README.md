@@ -23,8 +23,7 @@ BFS는 너비 우선 탐색으로 그래프 탐색 방법이다.
 
 ![image](https://user-images.githubusercontent.com/88877637/149550057-abe72134-3bc4-47d8-a8fd-78fc37763afb.png)
 
-example
-위와 같은 그래프가 있을 때 1에서 5로 가는 최단 경로를 구하는 방법은 다음과 같다.
+example) 위와 같은 그래프가 있을 때 1에서 5로 가는 최단 경로를 구하는 방법은 다음과 같다.
 - 1을 queue에 넣고 뺀 뒤 기준점을 1으로 설정하고 1의 인접한 2, 3, 4 정점을 순서대로 queue에 넣는다.
 - 기준점은 queue의 front인 2가 된다. 2를 queue에서 뺀다. 
 - 2의 인접점은 없기 때문에 queue에 넣지 않는다.
