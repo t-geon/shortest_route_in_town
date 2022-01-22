@@ -20,61 +20,57 @@ Graph::~Graph()
 }
 
 
-
-//³»°¡ Ãß°¡ÇÑ ÇÔ¼ö
-void Graph::AddName(int vertexKey,string name) {//ÀÌ¸§À» Ãß°¡ÇÏ´Â ÇÔ¼ö
+void Graph::AddName(int vertexKey,string name) {//add name
     Vertex* cur = FindVertex(vertexKey);
     if (cur == NULL) { return; }
     else { cur->SetName(name); }
 }
-void Graph::Addstore(int vertexKey, string store) {//ÀÌ¸§À» Ãß°¡ÇÏ´Â ÇÔ¼ö
+void Graph::Addstore(int vertexKey, string store) {//add name
     Vertex* cur = FindVertex(vertexKey);
     if (cur == NULL) {return; }
     else { cur->Setstore(store); }
 }
 
 
-
 /// add vertex with vertexNum at the end of the linked list for the vertics
-// ÀÌ¹Ì ÀÖ´Â key°ªÀ» »ğÀÔÇÒ ¶§´Â ±¸Çö µû·Î ¾ÈÇÔ(ÇØ¾ßÇÏ¸é ±× ³ëµå Áö¿ì°í Ã¤¿ì´Â°É·ÎÇÏ±â)
 void Graph::AddVertex(int vertexKey) {
     Vertex* cur = m_pVHead;
-    Vertex* inv = new Vertex(vertexKey);//ÀÌ·¸°Ô ÇØµµ ÃÊ±âÈ­ µÇ³ª? ine´Â »ğÀÔÇÒ vertex
+    Vertex* inv = new Vertex(vertexKey);
     
-    if (cur == NULL) { m_pVHead = inv;}//±×·¡ÇÁ°¡ ºñ¾îÀÖÀ¸¸é head¿¡ ³Ö±â
+    if (cur == NULL) { m_pVHead = inv;}//ê·¸ë˜í”„ê°€ ë¹„ì–´ìˆìœ¼ë©´ headì— ë„£ê¸°
     else {
-        while (cur->GetKey() < vertexKey && cur->GetNext() != NULL) {//»ğÀÔÇÏ·Á´Â key°ªÀÌ cutÀÇ key°ª Å©°í cur->next°¡ NULLÀÌ ¾Æ´Ï¸é
+        while (cur->GetKey() < vertexKey && cur->GetNext() != NULL) {//ì‚½ì…í•˜ë ¤ëŠ” keyê°’ì´ cutì˜ keyê°’ í¬ê³  cur->nextê°€ NULLì´ ì•„ë‹ˆë©´
             if(cur->GetNext()->GetKey()> vertexKey){
-                inv->SetNext(cur->GetNext());//curÀÇ next°¡ ÀÖ´Ù¸é invÀÇ next¿¡ ¿¬°á
-                cur->SetNext(inv);//curÀÇ next¿¡ ine ³Ö±â
-                m_vSize += 1;//size 1 Áõ°¡
+                inv->SetNext(cur->GetNext());//curì˜ nextê°€ ìˆë‹¤ë©´ invì˜ nextì— ì—°ê²°
+                cur->SetNext(inv);//curì˜ nextì— ine ë„£ê¸°
+                m_vSize += 1;//size 1 ì¦ê°€
                 return;
             }
-            cur = cur->GetNext();//curÀ» next·Î ÀÌµ¿
+            cur = cur->GetNext();//curì„ nextë¡œ ì´ë™
         }
-        cur->SetNext(inv);//curÀÇ next¿¡ ine ³Ö±â
+        cur->SetNext(inv);//curì˜ nextì— ine ë„£ê¸°
     }
-    m_vSize += 1;//size 1 Áõ°¡
+    m_vSize += 1;//size 1 ì¦ê°€
     return;
 }
 
 /// add edge from the vertex which the number is startVertexKey to the vertex which the number is endVertexKey
 void Graph::AddEdge(int startVertexKey, int endVertexKey, int weight) {
     Vertex* cur = FindVertex(startVertexKey);
-    if (cur == NULL) { cout << "½ÃÀÛ vertex°¡ Á¸ÀçÇÏÁö ¾ÊÀ½" << endl; return; }
+    if (cur == NULL) { cout << "ì‹œì‘ vertexê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ" << endl; return; }
     else { cur->AddEdge(endVertexKey, weight); }
 }
 
 /// get the vertex which the key is vertexNum
 Vertex* Graph::FindVertex(int key) {
     Vertex* cur = m_pVHead;
-    if (cur == NULL) { return NULL; }//graph°¡ ºñ¾îÀÖ´Ù
+    if (cur == NULL) { return NULL; }//graphê°€ ë¹„ì–´ìˆë‹¤
 
-    //¾Ë¸ÂÀº ½ÃÀÛ vertexÃ£±â(key°ªÀ¸·Î), keyº¸´Ù curÀÇ key°í curÀÇ next°¡ ÀÖÀ¸¸é curÀ» next·Î ÀÌµ¿
+    //ì•Œë§ì€ ì‹œì‘ vertexì°¾ê¸°(keyê°’ìœ¼ë¡œ), keyë³´ë‹¤ curì˜ keyê³  curì˜ nextê°€ ìˆìœ¼ë©´ curì„ nextë¡œ ì´ë™
     while (cur->GetKey() < key && cur->GetNext() != NULL) { cur = cur->GetNext(); }
 
-    if (cur->GetKey()== key) { return cur;}//ÇØ´ç vertex¿¡ ¹İÈ¯
-    else { return NULL; }//Ã£´Â vertex¾øÀ½
+    if (cur->GetKey()== key) { return cur;}//í•´ë‹¹ vertexì— ë°˜í™˜
+    else { return NULL; }//ì°¾ëŠ” vertexì—†ìŒ
 }
 
 /// get the number of the vertics
@@ -93,23 +89,23 @@ void Graph::Clear() {
 
 /// print out the graph as matrix form
 void Graph::Print(std::ofstream& fout) {
-    Vertex* curv = m_pVHead;//head vertex¿¡¼­ ½ÃÀÛ
+    Vertex* curv = m_pVHead;//head vertexì—ì„œ ì‹œì‘
     
-    while (curv != NULL) {//vertex Ãâ·Â
-        for (int i = 0; i < m_vSize; i++) {//¸ğµç vertex Ãâ·Â
-            Edge* cure = curv->FindEdge(i);//µµÂø vertex°¡ iÀÎ edgeÃ£±â
-            if (cure == NULL) { fout << "0 "; cout << "0 "; }//¾øÀ¸¸é 0Ãâ·Â
-            else { fout << cure->GetWeight() << " "; cout << cure->GetWeight() << " "; }//ÀÖÀ¸¸é weight Ãâ·Â
+    while (curv != NULL) {//vertex ì¶œë ¥
+        for (int i = 0; i < m_vSize; i++) {//ëª¨ë“  vertex ì¶œë ¥
+            Edge* cure = curv->FindEdge(i);//ë„ì°© vertexê°€ iì¸ edgeì°¾ê¸°
+            if (cure == NULL) { fout << "0 "; cout << "0 "; }//ì—†ìœ¼ë©´ 0ì¶œë ¥
+            else { fout << cure->GetWeight() << " "; cout << cure->GetWeight() << " "; }//ìˆìœ¼ë©´ weight ì¶œë ¥
         }
         fout << endl;
         cout << endl;
-        curv = curv->GetNext();//curv ÀÌµ¿
+        curv = curv->GetNext();//curv ì´ë™
     }
 }
 
 /// check whether the graph has negative edge or not.
-bool Graph::IsNegativeEdge() {//¸ğµç edgeÈ®ÀÎ
-    Vertex* curv = m_pVHead;//head vertex¿¡¼­ ½ÃÀÛ
+bool Graph::IsNegativeEdge() {//ëª¨ë“  edgeí™•ì¸
+    Vertex* curv = m_pVHead;//head vertexì—ì„œ ì‹œì‘
 
     while (curv != NULL) {
         Edge* cure = curv->GetHeadOfEdge();
@@ -127,10 +123,10 @@ bool Graph::IsNegativeEdge() {//¸ğµç edgeÈ®ÀÎ
 std::vector<int> Graph::FindPathBfs(int startVertexKey, int endVertexKey) {
     Queue<int> q;
     int endnum = 0,length=0;
-    vector<int> v;//µµÂøÁö ÀúÀå
-    vector<int> v1;//Ãâ¹ßÁö ÀúÀå
-    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//½ÃÀÛ vertex¿¡ ÀÎÁ¢ÇØÀÖ´Â vertexÁß Ã¹¹øÂ° edge, cure¿¡ ÀúÀå
-    q.push(startVertexKey);//queue¿¡ Ã¹¹øÂ° vertex³Ö±â
+    vector<int> v;//ë„ì°©ì§€ ì €ì¥
+    vector<int> v1;//ì¶œë°œì§€ ì €ì¥
+    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//ì‹œì‘ vertexì— ì¸ì ‘í•´ìˆëŠ” vertexì¤‘ ì²«ë²ˆì§¸ edge, cureì— ì €ì¥
+    q.push(startVertexKey);//queueì— ì²«ë²ˆì§¸ vertexë„£ê¸°
     v.push_back(startVertexKey);
     v1.push_back(startVertexKey);
     while (!q.empty()) {
@@ -139,35 +135,35 @@ std::vector<int> Graph::FindPathBfs(int startVertexKey, int endVertexKey) {
         q.pop();
         //cout << qn << endl;
         while (cure!= NULL&&endnum==0) {
-            vector<int>::iterator it = find(v.begin(), v.end(), cure->GetKey());//it¿¡ qnÀÇ À§Ä¡ÀúÀå, ¾øÀ¸¸é endÀ§Ä¡
-            if(it==v.end()){//vector¿¡ ¾ø´Â °ªÀÌ¸é
-                q.push(cure->GetKey());//qn vertex¿¡ ÀÎÁ¢ÇÑ vertexµé queue¿¡ ³Ö±â
-                //length = length + cure->GetWeight();//ºñ¿ëÀ» ´õÇØÁØ´Ù.
+            vector<int>::iterator it = find(v.begin(), v.end(), cure->GetKey());//itì— qnì˜ ìœ„ì¹˜ì €ì¥, ì—†ìœ¼ë©´ endìœ„ì¹˜
+            if(it==v.end()){//vectorì— ì—†ëŠ” ê°’ì´ë©´
+                q.push(cure->GetKey());//qn vertexì— ì¸ì ‘í•œ vertexë“¤ queueì— ë„£ê¸°
+                //length = length + cure->GetWeight();//ë¹„ìš©ì„ ë”í•´ì¤€ë‹¤.
                 v1.push_back(qn);
-                v.push_back(cure->GetKey());//¹æ¹® Ç¥½Ã
+                v.push_back(cure->GetKey());//ë°©ë¬¸ í‘œì‹œ
                 if (cure->GetKey() == endVertexKey) { endnum = 1; break; }
             }
             cure = cure->GetNext();
         }
     }
 
-    if (endnum != 1) { vector<int>em; return em; }//ÃÖ´Ü °æ·Î°¡ ¾øÀ¸¸é ºó º¤ÅÍ ¸®ÅÏ
+    if (endnum != 1) { vector<int>em; return em; }//ìµœë‹¨ ê²½ë¡œê°€ ì—†ìœ¼ë©´ ë¹ˆ ë²¡í„° ë¦¬í„´
 
     int c = 0,s=0;
-    vector<int> res;//°á°úÀúÀå
+    vector<int> res;//ê²°ê³¼ì €ì¥
     s = v1.back();
-    res.push_back(v.back());//ÃÖÁ¾µµÂøÁö res¿¡ ³Ö±â
+    res.push_back(v.back());//ìµœì¢…ë„ì°©ì§€ resì— ë„£ê¸°
     c = v.back();
-    length = length + FindVertex(s)->FindEdge(c)->GetWeight();//°æ·Î ºñ¿ë Ãß°¡
-    while (c!=startVertexKey) {//°Å²Ù·Î ÀÌµ¿
+    length = length + FindVertex(s)->FindEdge(c)->GetWeight();//ê²½ë¡œ ë¹„ìš© ì¶”ê°€
+    while (c!=startVertexKey) {//ê±°ê¾¸ë¡œ ì´ë™
         c = v.back();
-        if (s == c) {//Ãâ¹ßÁö°¡ ´Ù¸¥ µµÂøÁö¿Í °°´Ù¸é(°æ·Î ¸¸µé¾îÁø´Ù)
+        if (s == c) {//ì¶œë°œì§€ê°€ ë‹¤ë¥¸ ë„ì°©ì§€ì™€ ê°™ë‹¤ë©´(ê²½ë¡œ ë§Œë“¤ì–´ì§„ë‹¤)
             s = v1.back();
             if (s != c) {
                 res.push_back(c);
-                length = length + FindVertex(s)->FindEdge(c)->GetWeight(); //°æ·Î ºñ¿ë Ãß°¡
+                length = length + FindVertex(s)->FindEdge(c)->GetWeight(); //ê²½ë¡œ ë¹„ìš© ì¶”ê°€
             }
-            if (s == startVertexKey) {//¿ø·¡ Ãâ¹ßÁö ±îÁö ¿Ô´Ù¸é
+            if (s == startVertexKey) {//ì›ë˜ ì¶œë°œì§€ ê¹Œì§€ ì™”ë‹¤ë©´
                 res.push_back(s);
                 break;
             }
@@ -175,53 +171,53 @@ std::vector<int> Graph::FindPathBfs(int startVertexKey, int endVertexKey) {
         v1.pop_back();
         v.pop_back();
     }
-    res.push_back(length);//¸ÇµÚ¿¡´Â ºñ¿ë, À§¿¡¼­ºÎÅÍ ¾ÕÀ¸·Î ÇÏ¸é °æ·ÎµÊ
+    res.push_back(length);//ë§¨ë’¤ì—ëŠ” ë¹„ìš©, ìœ„ì—ì„œë¶€í„° ì•ìœ¼ë¡œ í•˜ë©´ ê²½ë¡œë¨
 
     return res;
 }
 
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
 std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey) {
-    int* length=new int[m_vSize];//ºñ¿ë ÀúÀå
-    int* prev_vertex = new int[m_vSize];//ÃÖ´Ü °æ·Î ÀúÀå
+    int* length=new int[m_vSize];//ë¹„ìš© ì €ì¥
+    int* prev_vertex = new int[m_vSize];//ìµœë‹¨ ê²½ë¡œ ì €ì¥
     int endnum = 0;
 
-    fill(length, length + m_vSize, IN_FINITY);//lengthÀüºÎ IN_FINITY·Î ÀúÀå
+    fill(length, length + m_vSize, IN_FINITY);//lengthì „ë¶€ IN_FINITYë¡œ ì €ì¥
 
-    set<pair<int,int>> s;//first´Â ºñ¿ë, second´Â µµÂøÁö
-    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//½ÃÀÛ vertex¿¡ ÀÎÁ¢ÇØÀÖ´Â vertexÁß Ã¹¹øÂ° edge, cure¿¡ ÀúÀå
+    set<pair<int,int>> s;//firstëŠ” ë¹„ìš©, secondëŠ” ë„ì°©ì§€
+    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//ì‹œì‘ vertexì— ì¸ì ‘í•´ìˆëŠ” vertexì¤‘ ì²«ë²ˆì§¸ edge, cureì— ì €ì¥
 
 
-    //Ãâ¹ßÁö ³Ö¾îÁÖ±â
+    //ì¶œë°œì§€ ë„£ì–´ì£¼ê¸°
     s.insert(make_pair(0, startVertexKey));
-    length[startVertexKey] = 0;//½ÃÀÛÁ¡ °Å¸®
+    length[startVertexKey] = 0;//ì‹œì‘ì  ê±°ë¦¬
 
     while (!s.empty()) {
-        int n = s.begin()->second;//ÃÖ¼Ò ºñ¿ëÀÎ °æ·Î¸¦ °¡Á®¿Â´Ù.
+        int n = s.begin()->second;//ìµœì†Œ ë¹„ìš©ì¸ ê²½ë¡œë¥¼ ê°€ì ¸ì˜¨ë‹¤.
         s.erase(s.begin());
 
-        if (n == endVertexKey) { endnum = 1; break; }//µµÂøÁö±îÁö ÃÖ´Ü°æ·Î°¡ ³ª¿Â¸é ³¡
+        if (n == endVertexKey) { endnum = 1; break; }//ë„ì°©ì§€ê¹Œì§€ ìµœë‹¨ê²½ë¡œê°€ ë‚˜ì˜¨ë©´ ë
 
-        cure = FindVertex(n)->GetHeadOfEdge();//cure¿¡ ÀÌµ¿ÇÑ vertexÀÇ Ã¹¹øÂ° edge ÀúÀå      
+        cure = FindVertex(n)->GetHeadOfEdge();//cureì— ì´ë™í•œ vertexì˜ ì²«ë²ˆì§¸ edge ì €ì¥      
         
 
         while (cure != NULL) {
             int next = cure->GetKey();
             int weight = cure->GetWeight();
 
-            if (length[next] > length[n] + weight) {//¿ø·¡ ÀúÀåµÈ °Å¸®º¸´Ù nÀ» °ÅÃÄ°¥ ¶§ ´õ ÂªÀ¸¸é
-                if (length[next] != IN_FINITY) { s.erase(make_pair(length[next], next)); }// ÀÌ¹Ì set¿¡ ÀÖ´Â °æ·Î¿¡¼­ ´õ ÂªÀº °æ·Î°¡ ³ª¿ÔÀ» ¶§ ¿ø·¡ set Áö¿ì±â
+            if (length[next] > length[n] + weight) {//ì›ë˜ ì €ì¥ëœ ê±°ë¦¬ë³´ë‹¤ nì„ ê±°ì³ê°ˆ ë•Œ ë” ì§§ìœ¼ë©´
+                if (length[next] != IN_FINITY) { s.erase(make_pair(length[next], next)); }// ì´ë¯¸ setì— ìˆëŠ” ê²½ë¡œì—ì„œ ë” ì§§ì€ ê²½ë¡œê°€ ë‚˜ì™”ì„ ë•Œ ì›ë˜ set ì§€ìš°ê¸°
                 length[next] = length[n] + weight;
                 prev_vertex[next] = n;
                 s.insert(make_pair(length[next], next));
             }
-            cure = cure->GetNext();//´ÙÀ½ °æ·Î
+            cure = cure->GetNext();//ë‹¤ìŒ ê²½ë¡œ
         }
     }
 
-    vector<int> v;//ÃÖ´Ü °æ·Î ÀúÀå
-    //°æ·Î°¡ ¾øÀ» ¶§
-    if (endnum != 1) { cout << "°æ·Î°¡ ¾ø´Ù" << endl; vector<int> b; return b;}
+    vector<int> v;//ìµœë‹¨ ê²½ë¡œ ì €ì¥
+    //ê²½ë¡œê°€ ì—†ì„ ë•Œ
+    if (endnum != 1) { cout << "ê²½ë¡œê°€ ì—†ë‹¤" << endl; vector<int> b; return b;}
     else {
         int index = endVertexKey;
         //cout << endVertexKey;
@@ -245,45 +241,45 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
 
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
 std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey) {
-    int* length = new int[m_vSize];//ºñ¿ë ÀúÀå
-    int* prev_vertex = new int[m_vSize];//ÃÖ´Ü °æ·Î ÀúÀå
+    int* length = new int[m_vSize];//ë¹„ìš© ì €ì¥
+    int* prev_vertex = new int[m_vSize];//ìµœë‹¨ ê²½ë¡œ ì €ì¥
     int endnum = 0,dump=0;
 
-    fill(length, length + m_vSize, IN_FINITY);//lengthÀüºÎ IN_FINITY·Î ÀúÀå
+    fill(length, length + m_vSize, IN_FINITY);//lengthì „ë¶€ IN_FINITYë¡œ ì €ì¥
 
-    MinHeap<int, int> h;//first´Â ºñ¿ë, second´Â µµÂøÁö
-    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//½ÃÀÛ vertex¿¡ ÀÎÁ¢ÇØÀÖ´Â vertexÁß Ã¹¹øÂ° edge, cure¿¡ ÀúÀå
+    MinHeap<int, int> h;//firstëŠ” ë¹„ìš©, secondëŠ” ë„ì°©ì§€
+    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//ì‹œì‘ vertexì— ì¸ì ‘í•´ìˆëŠ” vertexì¤‘ ì²«ë²ˆì§¸ edge, cureì— ì €ì¥
 
 
-    //Ãâ¹ßÁö ³Ö¾îÁÖ±â
+    //ì¶œë°œì§€ ë„£ì–´ì£¼ê¸°
     h.Push(0, startVertexKey);
-    length[startVertexKey] = 0;//½ÃÀÛÁ¡ °Å¸®
+    length[startVertexKey] = 0;//ì‹œì‘ì  ê±°ë¦¬
 
     while (!h.IsEmpty()) {
-        int n = h.Top().second;//ÃÖ¼Òºñ¿ëÀÎ vetext °¡Á®¿À±â
-        h.Pop();//ÃÖ¼Ò °ª Áö¿ì±â
-        if (n == endVertexKey) { endnum = 1; break; }//µµÂøÁö±îÁö ÃÖ´Ü°æ·Î°¡ ³ª¿Â¸é ³¡
+        int n = h.Top().second;//ìµœì†Œë¹„ìš©ì¸ vetext ê°€ì ¸ì˜¤ê¸°
+        h.Pop();//ìµœì†Œ ê°’ ì§€ìš°ê¸°
+        if (n == endVertexKey) { endnum = 1; break; }//ë„ì°©ì§€ê¹Œì§€ ìµœë‹¨ê²½ë¡œê°€ ë‚˜ì˜¨ë©´ ë
 
-        cure = FindVertex(n)->GetHeadOfEdge();//cure¿¡ ÀÌµ¿ÇÑ vertexÀÇ Ã¹¹øÂ° edge ÀúÀå      
+        cure = FindVertex(n)->GetHeadOfEdge();//cureì— ì´ë™í•œ vertexì˜ ì²«ë²ˆì§¸ edge ì €ì¥      
 
         while (cure != NULL) {
             int next = cure->GetKey();
             int weight = cure->GetWeight();
 
-            if (length[next] > length[n] + weight) {//¿ø·¡ ÀúÀåµÈ °Å¸®º¸´Ù nÀ» °ÅÃÄ°¥ ¶§ ´õ ÂªÀ¸¸é
-                if (length[next] != IN_FINITY) { dump=1; }// ÀÌ¹Ì heap¿¡ ÀÖ´Â °æ·Î¿¡¼­ ´õ ÂªÀº °æ·Î°¡ ³ª¿ÔÀ» ¶§ dump=1
+            if (length[next] > length[n] + weight) {//ì›ë˜ ì €ì¥ëœ ê±°ë¦¬ë³´ë‹¤ nì„ ê±°ì³ê°ˆ ë•Œ ë” ì§§ìœ¼ë©´
+                if (length[next] != IN_FINITY) { dump=1; }// ì´ë¯¸ heapì— ìˆëŠ” ê²½ë¡œì—ì„œ ë” ì§§ì€ ê²½ë¡œê°€ ë‚˜ì™”ì„ ë•Œ dump=1
                 length[next] = length[n] + weight;
                 prev_vertex[next] = n;
-                if (dump == 1) { h.DecKey(next, length[next]); dump = 0; }//´õ ÂªÀº °æ·Î¸¦ Ã£¾ÒÀ» ¶§
+                if (dump == 1) { h.DecKey(next, length[next]); dump = 0; }//ë” ì§§ì€ ê²½ë¡œë¥¼ ì°¾ì•˜ì„ ë•Œ
                 else { h.Push(length[next], next); }
             }
-            cure = cure->GetNext();//´ÙÀ½ °æ·Î
+            cure = cure->GetNext();//ë‹¤ìŒ ê²½ë¡œ
         }
     }
 
-    vector<int> v;//ÃÖ´Ü °æ·Î ÀúÀå
-    //°æ·Î°¡ ¾øÀ» ¶§
-    if (endnum != 1) { cout << "°æ·Î°¡ ¾ø´Ù" << endl; vector<int> b; return b; }
+    vector<int> v;//ìµœë‹¨ ê²½ë¡œ ì €ì¥
+    //ê²½ë¡œê°€ ì—†ì„ ë•Œ
+    if (endnum != 1) { cout << "ê²½ë¡œê°€ ì—†ë‹¤" << endl; vector<int> b; return b; }
     else {
         int index = endVertexKey;
         //cout << endVertexKey;
@@ -307,51 +303,51 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey,
 /// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
 std::vector<int> Graph::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey) {
     int* d = new int[m_vSize];
-    fill(d, d + m_vSize, IN_FINITY);//d ÀüºÎ IN_FINITY·Î ÀúÀå
+    fill(d, d + m_vSize, IN_FINITY);//d ì „ë¶€ IN_FINITYë¡œ ì €ì¥
     int* p = new int[m_vSize];
-    fill(p,p + m_vSize, -1);//pÀüºÎ -1·Î ÀúÀå
+    fill(p,p + m_vSize, -1);//pì „ë¶€ -1ë¡œ ì €ì¥
 
-    d[startVertexKey] = 0;//½ÃÀÛÁö 0À¸·Î ÃÊ±âÈ­
+    d[startVertexKey] = 0;//ì‹œì‘ì§€ 0ìœ¼ë¡œ ì´ˆê¸°í™”
 
-    Vertex* curv = m_pVHead;//½ÃÀÛ vertex ÀúÀå
-    Edge* cure = curv->GetHeadOfEdge();//½ÃÀÛ vertexÀÇ Ã¹¹øÂ° edgeÀúÀå
+    Vertex* curv = m_pVHead;//ì‹œì‘ vertex ì €ì¥
+    Edge* cure = curv->GetHeadOfEdge();//ì‹œì‘ vertexì˜ ì²«ë²ˆì§¸ edgeì €ì¥
     for (int z = 0; z < m_vSize - 1; z++) {
-        curv = m_pVHead;//½ÃÀÛ vertex ÀúÀå
-        for (int i = 0; i < m_vSize; i++) {//¸ğµç vertex¹İº¹
-            cure = curv->GetHeadOfEdge();//½ÃÀÛ vertexÀÇ Ã¹¹øÂ° edgeÀúÀå
-            if (d[curv->GetKey()] != IN_FINITY) {//¹æ¹®Çß´ø °÷ÀÌ¸é È®ÀÎ
-                while (cure != NULL) {//ÇÏ³ªÀÇ vertexÀÇ ÀÎÁ¢ vertex¹æ¹®
-                    int v = cure->GetKey();//µµÂøÁö
-                    int weight = cure->GetWeight();//ºñ¿ë
-                    int w = curv->GetKey();//Ãâ¹ßÁö
+        curv = m_pVHead;//ì‹œì‘ vertex ì €ì¥
+        for (int i = 0; i < m_vSize; i++) {//ëª¨ë“  vertexë°˜ë³µ
+            cure = curv->GetHeadOfEdge();//ì‹œì‘ vertexì˜ ì²«ë²ˆì§¸ edgeì €ì¥
+            if (d[curv->GetKey()] != IN_FINITY) {//ë°©ë¬¸í–ˆë˜ ê³³ì´ë©´ í™•ì¸
+                while (cure != NULL) {//í•˜ë‚˜ì˜ vertexì˜ ì¸ì ‘ vertexë°©ë¬¸
+                    int v = cure->GetKey();//ë„ì°©ì§€
+                    int weight = cure->GetWeight();//ë¹„ìš©
+                    int w = curv->GetKey();//ì¶œë°œì§€
 
-                    if (d[v] > d[w] + weight) {//°æÀ¯ÇØ¼­ °¡´Â °æ¿ì°¡ ºñ¿ëÀÌ ÀûÀ¸¸é
-                        d[v] = d[w] + weight;//ºñ¿ë °»½Å
-                        p[v] = w;//ºñ¿ëÀÌ °»½ÅµÇ¾ú´Ù¸é µµÂøÁöÀÇ ÀÌÀü vertex¸¦ p¿¡ ÀúÀå
+                    if (d[v] > d[w] + weight) {//ê²½ìœ í•´ì„œ ê°€ëŠ” ê²½ìš°ê°€ ë¹„ìš©ì´ ì ìœ¼ë©´
+                        d[v] = d[w] + weight;//ë¹„ìš© ê°±ì‹ 
+                        p[v] = w;//ë¹„ìš©ì´ ê°±ì‹ ë˜ì—ˆë‹¤ë©´ ë„ì°©ì§€ì˜ ì´ì „ vertexë¥¼ pì— ì €ì¥
                     }
-                    cure = cure->GetNext();//´ÙÀ½ edge
+                    cure = cure->GetNext();//ë‹¤ìŒ edge
                 }
             }
-            curv = curv->GetNext();//´ÙÀ½ vertex
+            curv = curv->GetNext();//ë‹¤ìŒ vertex
         }
     }
     
     curv = m_pVHead;
-    for (int i = 0; i < m_vSize; i++) {//¸ğµç vertex¹İº¹
+    for (int i = 0; i < m_vSize; i++) {//ëª¨ë“  vertexë°˜ë³µ
         cure = curv->GetHeadOfEdge();
-        if (d[curv->GetKey()] != IN_FINITY) {//¹æ¹®Çß´ø °÷ÀÌ¸é È®ÀÎ
-            while (cure != NULL) {//ÇÏ³ªÀÇ vertexÀÇ ÀÎÁ¢ vertex¹æ¹®
-                int v = cure->GetKey();//µµÂøÁö
-                int weight = cure->GetWeight();//ºñ¿ë
-                int w = curv->GetKey();//Ãâ¹ßÁö
+        if (d[curv->GetKey()] != IN_FINITY) {//ë°©ë¬¸í–ˆë˜ ê³³ì´ë©´ í™•ì¸
+            while (cure != NULL) {//í•˜ë‚˜ì˜ vertexì˜ ì¸ì ‘ vertexë°©ë¬¸
+                int v = cure->GetKey();//ë„ì°©ì§€
+                int weight = cure->GetWeight();//ë¹„ìš©
+                int w = curv->GetKey();//ì¶œë°œì§€
 
-                if (d[v] > d[w] + weight) {//n-1¹ø ÇÏ°í ³­ µÚ¿¡ °æ·Îº¯È­°¡ ÀÖ´Â°æ¿ì(À½¼ö½ÎÀÌÅ¬)
-                    vector<int> b; return b;//ºó vector¹İÈ¯
+                if (d[v] > d[w] + weight) {//n-1ë²ˆ í•˜ê³  ë‚œ ë’¤ì— ê²½ë¡œë³€í™”ê°€ ìˆëŠ”ê²½ìš°(ìŒìˆ˜ì‹¸ì´í´)
+                    vector<int> b; return b;//ë¹ˆ vectorë°˜í™˜
                 }
-                cure = cure->GetNext();//´ÙÀ½ edge
+                cure = cure->GetNext();//ë‹¤ìŒ edge
             }
         }
-        curv = curv->GetNext();//´ÙÀ½ vertex
+        curv = curv->GetNext();//ë‹¤ìŒ vertex
     }
     
     vector<int> v;
@@ -374,16 +370,16 @@ std::vector<vector<int> > Graph::FindShortestPathFloyd() {
     //initialization
     for (int i = 0; i < m_vSize; i++) {
         for (int j = 0; j < m_vSize; j++) {
-            if (i == j) { a[i][j]=0; }//ÀÚ±â ÀÚ½Å¿¡°Ô °¡´Â °ÍÀº 0
+            if (i == j) { a[i][j]=0; }//ìê¸° ìì‹ ì—ê²Œ ê°€ëŠ” ê²ƒì€ 0
             else { a[i][j] = IN_FINITY; }
         }
     }
 
-    Vertex* curv = m_pVHead;//head vertex¿¡¼­ ½ÃÀÛ
-    while (curv != NULL) {//vertex Ãâ·Â
-        Edge* cure = curv->GetHeadOfEdge();//µµÂø vertex°¡ iÀÎ edgeÃ£±â
+    Vertex* curv = m_pVHead;//head vertexì—ì„œ ì‹œì‘
+    while (curv != NULL) {//vertex ì¶œë ¥
+        Edge* cure = curv->GetHeadOfEdge();//ë„ì°© vertexê°€ iì¸ edgeì°¾ê¸°
         while (cure != NULL) {
-            a[curv->GetKey()][cure->GetKey()] = cure->GetWeight();//a[Ãâ¹ßÁ¤Á¡][µµÂøÁ¤Á¡]=ºñ¿ë
+            a[curv->GetKey()][cure->GetKey()] = cure->GetWeight();//a[ì¶œë°œì •ì ][ë„ì°©ì •ì ]=ë¹„ìš©
             cure = cure->GetNext();
         }
         curv = curv->GetNext();
@@ -391,15 +387,15 @@ std::vector<vector<int> > Graph::FindShortestPathFloyd() {
 
 
     for (int k = 0; k < m_vSize; k++) {
-        for (int i = 0; i < m_vSize; i++) {//¸ğµç vertex¹İº¹
+        for (int i = 0; i < m_vSize; i++) {//ëª¨ë“  vertexë°˜ë³µ
             for (int j = 0; j < m_vSize; j++) {
                 if (a[i][j] > a[i][k] + a[k][j]) { a[i][j] = a[i][k] + a[k][j]; }
             }
         }
     }
  
-    for (int i = 0; i < m_vSize; i++) {//À½¼ö »çÀÌÅ¬ È®ÀÎÇÏ´Â ¹İº¹¹®
-        if (a[i][i] < 0) { vector<vector<int>> s; return s; }//ÀÚ±â ÀÚ½ÅÀ¸·Î °¡´Â °ªÀÌ À½¼ö°¡ µÇ¸é À½¼ö»çÀÌÅ¬ »ı±ä °Í
+    for (int i = 0; i < m_vSize; i++) {//ìŒìˆ˜ ì‚¬ì´í´ í™•ì¸í•˜ëŠ” ë°˜ë³µë¬¸
+        if (a[i][i] < 0) { vector<vector<int>> s; return s; }//ìê¸° ìì‹ ìœ¼ë¡œ ê°€ëŠ” ê°’ì´ ìŒìˆ˜ê°€ ë˜ë©´ ìŒìˆ˜ì‚¬ì´í´ ìƒê¸´ ê²ƒ
     }
     
     return a;
