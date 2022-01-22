@@ -57,16 +57,15 @@ void Graph::AddVertex(int vertexKey) {
 /// add edge from the vertex which the number is startVertexKey to the vertex which the number is endVertexKey
 void Graph::AddEdge(int startVertexKey, int endVertexKey, int weight) {
     Vertex* cur = FindVertex(startVertexKey);
-    if (cur == NULL) { cout << "시작 vertex가 존재하지 않음" << endl; return; }
+    if (cur == NULL) { cout << "no start vertex" << endl; return; }
     else { cur->AddEdge(endVertexKey, weight); }
 }
 
 /// get the vertex which the key is vertexNum
 Vertex* Graph::FindVertex(int key) {
     Vertex* cur = m_pVHead;
-    if (cur == NULL) { return NULL; }//graph가 비어있다
+    if (cur == NULL) { return NULL; }//empty graph
 
-    //알맞은 시작 vertex찾기(key값으로), key보다 cur의 key고 cur의 next가 있으면 cur을 next로 이동
     while (cur->GetKey() < key && cur->GetNext() != NULL) { cur = cur->GetNext(); }
 
     if (cur->GetKey()== key) { return cur;}//해당 vertex에 반환
