@@ -50,7 +50,7 @@ void Graph::AddVertex(int vertexKey) {
         }
         cur->SetNext(inv);//cur의 next에 ine 넣기
     }
-    m_vSize += 1;//size 1 증가
+    m_vSize += 1;//size increase
     return;
 }
 
