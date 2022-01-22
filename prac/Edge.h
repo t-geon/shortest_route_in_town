@@ -17,22 +17,22 @@ private:
     Edge* m_pNext;
 
 public:
-    /// constructor
+    // constructor
     Edge();
 
-    /// copy constructor
+    // copy constructor
     Edge(int key, int weight);
 
-    /// set the next pointer of this edge
+    // set the next pointer of this edge
     void SetNext(Edge* pNext);
 
-    /// get the key of this edge
+    // get the key of this edge
     int GetKey() const;
 
-    /// get the weight of this edge
+    // get the weight of this edge
     int GetWeight() const;
 
-    /// get the next pointer of this edge
+    // get the next pointer of this edge
     Edge* GetNext() const;
 };
 
