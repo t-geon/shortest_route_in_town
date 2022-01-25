@@ -27,11 +27,11 @@ void Manager::Run(const char* filepath)
     {
         fin.getline(cmd, 32);//Read 1 line of command.txt
         if (!strcmp(cmd, "")) { continue; }//Code to repeat the number of lines
-        else if (cmd[0] == '/' && cmd[1] == '/') { continue; }// "//"ÀÌ¸é ¸í·É¾î ¾È ÀĞ´Â´Ù
+        else if (cmd[0] == '/' && cmd[1] == '/') { continue; }// "//"ì´ë©´ ëª…ë ¹ì–´ ì•ˆ ì½ëŠ”ë‹¤
         char* tmp, * tmm;
         strtok_s(cmd, " ", &tmp);//Saved in the character cmd in front of the "" standard, and the remaining characters in the address of tmp
         
-        
+        //select LOAD
         if (!strcmp(cmd, "LOAD")) {
             cout << "========LOAD========" << endl<<endl;
             fout << "========LOAD========" << endl << endl;
@@ -41,6 +41,7 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
         
+        //select PRINT
         else if (!strcmp(cmd, "PRINT")) {
             cout << "========PRINT========" << endl<<endl;
             fout << "========PRINT========" << endl << endl;
@@ -50,6 +51,7 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
 
+        //select UPDATE 
         else if (!strcmp(cmd, "UPDATE")) {
             cout << "========UPDATE========" << endl << endl;
             fout << "========UPDATE========" << endl << endl;
@@ -60,10 +62,11 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
 
+        //select BFS
         else if (!strcmp(cmd, "BFS")) {
             cout << "========BFS========" << endl<<endl;
             fout << "========BFS========" << endl << endl;
-            //¸í·É¾î ÀÎÀÚºÎÁ·
+            //ëª…ë ¹ì–´ ì¸ìë¶€ì¡±
             if (!strcmp(tmp,"")) { fout << "VertexKeyNotExist"  << endl; cout << "VertexKeyNotExist" << endl;re= VertexKeyNotExist;}
             else {
                 strtok_s(tmp, " ", &tmm);
@@ -78,10 +81,12 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
 
+        //select DIJKSTRA
         else if (!strcmp(cmd, "DIJKSTRA")) {
             cout << "========DIJKSTRA========" << endl << endl;
             fout << "========DIJKSTRA========" << endl << endl;
-            //¸í·É¾î ÀÎÀÚºÎÁ·
+            
+            //ëª…ë ¹ì–´ ì¸ìë¶€ì¡±
             if (!strcmp(tmp, "")) { fout << "VertexKeyNotExist" << endl; cout << "VertexKeyNotExist" << endl; re = VertexKeyNotExist;
             }
             else {
@@ -97,10 +102,11 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
 
+        //select DIJKSTRAMIN
         else if (!strcmp(cmd, "DIJKSTRAMIN")) {
             cout << "========DIJKSTRAMIN========" << endl << endl;
             fout << "========DIJKSTRAMIN========" << endl << endl;
-            //¸í·É¾î ÀÎÀÚºÎÁ·
+            //ëª…ë ¹ì–´ ì¸ìë¶€ì¡±
             if (!strcmp(tmp, "")) { fout << "VertexKeyNotExist" << endl; cout << "VertexKeyNotExist" << endl; re = VertexKeyNotExist;}
             else {
                 strtok_s(tmp, " ", &tmm);
@@ -115,10 +121,11 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
 
+        //select BELLMANFORD
         else if (!strcmp(cmd, "BELLMANFORD")) {
             cout << "========BELLMANFORD========" << endl << endl;
             fout << "========BELLMANFORD========" << endl << endl;
-            //¸í·É¾î ÀÎÀÚºÎÁ·
+            //ëª…ë ¹ì–´ ì¸ìë¶€ì¡±
             if (!strcmp(tmp, "")) { fout << "VertexKeyNotExist" << endl; cout << "VertexKeyNotExist" << endl; re = VertexKeyNotExist;}
             else {
                 strtok_s(tmp, " ", &tmm);
@@ -133,6 +140,7 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
 
+        //select FLOYD
         else if (!strcmp(cmd, "FLOYD")) {
             cout << "========FLOYD========" << endl<<endl;
             fout << "========FLOYD========" << endl << endl;
@@ -142,9 +150,10 @@ void Manager::Run(const char* filepath)
             PrintError(re);
         }
 
+        //select CONFIG
         else if (!strcmp(cmd, "CONFIG")) {
             cout << "========CONFIG LOG========" << endl<<endl;
-            //Àü´ŞµÈ ÀÎÀÚ°¡ ºÎÁ·ÇÒ ¶§
+            //ì „ë‹¬ëœ ì¸ìê°€ ë¶€ì¡±í•  ë•Œ
             if (!strcmp(tmp, "")) { fout << "InvalidOptionName" << endl; cout << "InvalidOptionName" << endl; re = InvalidOptionName; }
             else {
                 tmp = strtok_s(tmp, " ", &tmm);
@@ -217,18 +226,18 @@ void Manager::PrintError(Result result)
 }
 
 
-/// <summary>
-/// make a graph
-/// </summary>
-///
-/// <param name="filepath">
-/// the filepath to read to make the graph
-/// </param>
-///
-/// <returns>
-/// Result::Success if load is successful.
-/// Result::LoadFileNotExist if file is not exist.
-/// </returns>
+// <summary>
+// make a graph
+// </summary>
+//
+// <param name="filepath">
+// the filepath to read to make the graph
+// </param>
+//
+// <returns>
+// Result::Success if load is successful.
+// Result::LoadFileNotExist if file is not exist.
+// </returns>
 Result Manager::Load(const char* filepath)
 {
     ifstream fi;
@@ -236,7 +245,7 @@ Result Manager::Load(const char* filepath)
     if (!fi) {return LoadFileNotExist; }
 
     int vnum = 0, gsize = 0;
-    string name, store,ns1;//°¡°Ô, ÁÖÀÎ, °£ÆÇ ÀÌ¸§ÀúÀå
+    string name, store,ns1;//ê°€ê²Œ, ì£¼ì¸, ê°„íŒ ì´ë¦„ì €ì¥
 
     //read first line
     char cmd1[100];
@@ -249,23 +258,23 @@ Result Manager::Load(const char* filepath)
         fi.getline(cmd1, 100);//Read 1 line of command.txt
         if (!strcmp(cmd1, "")) { continue; }//Code to repeat the number of lines
         char* tmp1, * tmm1, * cmp2;
-        strtok_s(cmd1, "/", &tmp1);//cmd1´Â /¾Õ ¹®ÀÚ¿­(ÁÖÀÎÀÌ¸§,°£ÆÇ) tmp´Â /µÚ ¹®ÀÚ¿­(ºñ¿ë)
+        strtok_s(cmd1, "/", &tmp1);//cmd1ëŠ” /ì• ë¬¸ìì—´(ì£¼ì¸ì´ë¦„,ê°„íŒ) tmpëŠ” /ë’¤ ë¬¸ìì—´(ë¹„ìš©)
         
         ns1 = string(cmd1);
         ns1.erase(ns1.size() - 1, 1);
-        strtok_s(cmd1, "'", &cmp2);//cmd1´Â ÀÌ¸§, cmp1Àº s °£ÆÇ¸í
+        strtok_s(cmd1, "'", &cmp2);//cmd1ëŠ” ì´ë¦„, cmp1ì€ s ê°„íŒëª…
         name = string(cmd1);
-        strtok_s(cmp2, " ", &cmp2);//cmp1Àº °£ÆÇ¸í
+        strtok_s(cmp2, " ", &cmp2);//cmp1ì€ ê°„íŒëª…
         store = string(cmp2);
 
-        m_graph.AddVertex(vnum);//vertex »ğÀÔ
-        m_graph.FindVertex(vnum)->ns = ns1;//°£ÆÇ¸í ÀúÀå
-        m_graph.AddName(vnum, name);//name ÀúÀå
-        m_graph.Addstore(vnum, store);//store ÀúÀå
+        m_graph.AddVertex(vnum);//vertex ì‚½ì…
+        m_graph.FindVertex(vnum)->ns = ns1;//ê°„íŒëª… ì €ì¥
+        m_graph.AddName(vnum, name);//name ì €ì¥
+        m_graph.Addstore(vnum, store);//store ì €ì¥
 
-        for (int i = 0; i < gsize; i++) {//edgeÃß°¡
-            tmm1 = strtok_s(tmp1, " ", &tmp1);//tmm´Â " "¾Õ ¹®ÀÚ¿­ tmp´Â " "µÚ ¹®ÀÚ¿­
-            if (stoi(tmm1) != 0) { m_graph.AddEdge(vnum, i, stoi(tmm1)); }//vnum¹øÂ° vertex¿¡ edgeÃß°¡
+        for (int i = 0; i < gsize; i++) {//edgeì¶”ê°€
+            tmm1 = strtok_s(tmp1, " ", &tmp1);//tmmëŠ” " "ì• ë¬¸ìì—´ tmpëŠ” " "ë’¤ ë¬¸ìì—´
+            if (stoi(tmm1) != 0) { m_graph.AddEdge(vnum, i, stoi(tmm1)); }//vnumë²ˆì§¸ vertexì— edgeì¶”ê°€
         }
         vnum += 1;
     }
@@ -311,9 +320,9 @@ Result Manager::FindPathBfs(int startVertexKey, int endVertexKey)
     if (m_graph.FindVertex(startVertexKey) == NULL || m_graph.FindVertex(endVertexKey) == NULL) { return InvalidVertexKey; }
     vector<int> v = m_graph.FindPathBfs(startVertexKey, endVertexKey);
     if (v.size() == 0) {
-        fout << "ÃÖ´Ü °æ·Î°¡ ¾ø´Ù" << endl; 
-        cout << "ÃÖ´Ü °æ·Î°¡ ¾ø´Ù" << endl; return InvalidAlgorithm; }
-    //ÃÖ´Ü°æ·Î°¡ ¾øÀ» ¶§ ¿¡·¯°¡ ¾ø¾î¼­ ÀÓÀÇ·Î ³ÖÀ½
+        fout << "ìµœë‹¨ ê²½ë¡œê°€ ì—†ë‹¤" << endl; 
+        cout << "ìµœë‹¨ ê²½ë¡œê°€ ì—†ë‹¤" << endl; return InvalidAlgorithm; }
+    //ìµœë‹¨ê²½ë¡œê°€ ì—†ì„ ë•Œ ì—ëŸ¬ê°€ ì—†ì–´ì„œ ì„ì˜ë¡œ ë„£ìŒ
     else {
         int length = v.back();
         v.pop_back();
@@ -321,15 +330,15 @@ Result Manager::FindPathBfs(int startVertexKey, int endVertexKey)
         fout << "shortest path: ";
         for (int i = v.size() - 1; i >= 0; i--) { 
             fout << v[i] << " ";
-            cout << v[i] << " "; }//µÚ¿¡¼­ ºÎÅÍ Ãâ·ÂÇÏ¸é °æ·ÎµÊ
+            cout << v[i] << " "; }//ë’¤ì—ì„œ ë¶€í„° ì¶œë ¥í•˜ë©´ ê²½ë¡œë¨
        
         int* vv = &v[0];
         sort(con, vv, v.size());
 
         fout << endl << "path length: " << length << endl;
         cout << endl<<"path length: "<<length<<endl;
-        //courseºÎºĞ Ãâ·Â
-        compression(v);//v¿¡´Â ÃÖ´Ü°æ·Î ¼øÀ¸·Î ÀúÀåµÇ¾îÀÖ´Ù.
+        //courseë¶€ë¶„ ì¶œë ¥
+        compression(v);//vì—ëŠ” ìµœë‹¨ê²½ë¡œ ìˆœìœ¼ë¡œ ì €ì¥ë˜ì–´ìˆë‹¤.
     }
     return Success;
 }
@@ -355,21 +364,21 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
     if (m_graph.IsNegativeEdge() == 1) { return InvalidAlgorithm; }
     if (m_graph.FindVertex(startVertexKey) == NULL || m_graph.FindVertex(endVertexKey) == NULL) { return InvalidVertexKey; }
     vector<int> v = m_graph.FindShortestPathDijkstraUsingSet(startVertexKey, endVertexKey);
-    if (v.size() == 0) { fout << "ÃÖ´Ü °æ·Î°¡ ¾ø´Ù" << endl; cout << "ÃÖ´Ü °æ·Î°¡ ¾ø´Ù" << endl; return InvalidAlgorithm; }
-    //ÃÖ´Ü°æ·Î°¡ ¾øÀ» ¶§ ¿¡·¯°¡ ¾ø¾î¼­ ÀÓÀÇ·Î ³ÖÀ½
+    if (v.size() == 0) { fout << "ìµœë‹¨ ê²½ë¡œê°€ ì—†ë‹¤" << endl; cout << "ìµœë‹¨ ê²½ë¡œê°€ ì—†ë‹¤" << endl; return InvalidAlgorithm; }
+    //ìµœë‹¨ê²½ë¡œê°€ ì—†ì„ ë•Œ ì—ëŸ¬ê°€ ì—†ì–´ì„œ ì„ì˜ë¡œ ë„£ìŒ
     else {
         int length = v.back();
         v.pop_back();
         fout << "shortest path: "; cout << "shortest path: ";
-        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//µÚ¿¡¼­ ºÎÅÍ Ãâ·ÂÇÏ¸é °æ·ÎµÊ
+        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//ë’¤ì—ì„œ ë¶€í„° ì¶œë ¥í•˜ë©´ ê²½ë¡œë¨
 
         int* vv = &v[0];
         sort(con, vv, v.size());
 
         fout << endl << "path length: " << length << endl;
         cout << endl << "path length: " << length << endl;
-        //courseºÎºĞ Ãâ·Â
-        compression(v);//v¿¡´Â ÃÖ´Ü°æ·Î ¼øÀ¸·Î ÀúÀåµÇ¾îÀÖ´Ù.
+        //courseë¶€ë¶„ ì¶œë ¥
+        compression(v);//vì—ëŠ” ìµœë‹¨ê²½ë¡œ ìˆœìœ¼ë¡œ ì €ì¥ë˜ì–´ìˆë‹¤.
     }
     
     return Success;
@@ -397,22 +406,22 @@ Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int end
     if (m_graph.FindVertex(startVertexKey) == NULL || m_graph.FindVertex(endVertexKey) == NULL) { return InvalidVertexKey; }
     
     vector<int> v = m_graph.FindShortestPathDijkstraUsingMinHeap(startVertexKey, endVertexKey);
-    if (v.size() == 0) { fout << "ÃÖ´Ü °æ·Î°¡ ¾ø´Ù" << endl; cout << "ÃÖ´Ü °æ·Î°¡ ¾ø´Ù" << endl; return InvalidAlgorithm; }
-    //ÃÖ´Ü°æ·Î°¡ ¾øÀ» ¶§ ¿¡·¯°¡ ¾ø¾î¼­ ÀÓÀÇ·Î ³ÖÀ½
+    if (v.size() == 0) { fout << "ìµœë‹¨ ê²½ë¡œê°€ ì—†ë‹¤" << endl; cout << "ìµœë‹¨ ê²½ë¡œê°€ ì—†ë‹¤" << endl; return InvalidAlgorithm; }
+    //ìµœë‹¨ê²½ë¡œê°€ ì—†ì„ ë•Œ ì—ëŸ¬ê°€ ì—†ì–´ì„œ ì„ì˜ë¡œ ë„£ìŒ
     else {
         int length = v.back();
         v.pop_back();
         fout << "shortest path: ";
         cout << "shortest path: ";
-        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//µÚ¿¡¼­ ºÎÅÍ Ãâ·ÂÇÏ¸é °æ·ÎµÊ
+        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//ë’¤ì—ì„œ ë¶€í„° ì¶œë ¥í•˜ë©´ ê²½ë¡œë¨
 
         int* vv = &v[0];
         sort(con, vv, v.size());
 
         fout << endl << "path length: " << length << endl;
         cout << endl << "path length: " << length << endl;
-        //courseºÎºĞ Ãâ·Â
-        compression(v);//v¿¡´Â ÃÖ´Ü°æ·Î ¼øÀ¸·Î ÀúÀåµÇ¾îÀÖ´Ù.
+        //courseë¶€ë¶„ ì¶œë ¥
+        compression(v);//vì—ëŠ” ìµœë‹¨ê²½ë¡œ ìˆœìœ¼ë¡œ ì €ì¥ë˜ì–´ìˆë‹¤.
     }
 
     return Success;
@@ -440,22 +449,22 @@ Result Manager::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey
     if (m_graph.FindVertex(startVertexKey) == NULL || m_graph.FindVertex(endVertexKey) == NULL) { return InvalidVertexKey; }
     
     vector<int> v = m_graph.FindShortestPathBellmanFord(startVertexKey, endVertexKey);
-    if (v.size() == 0) { return NegativeCycleDetected; } //À½¼ö weightÀÎ ½ÎÀÌÅ¬ÀÌ ÀÖ³ª È®ÀÎ
+    if (v.size() == 0) { return NegativeCycleDetected; } //ìŒìˆ˜ weightì¸ ì‹¸ì´í´ì´ ìˆë‚˜ í™•ì¸
     
     else {
         int length = v.back();
         v.pop_back();
         fout << "shortest path: ";
         cout << "shortest path: ";
-        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//µÚ¿¡¼­ ºÎÅÍ Ãâ·ÂÇÏ¸é °æ·ÎµÊ
+        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//ë’¤ì—ì„œ ë¶€í„° ì¶œë ¥í•˜ë©´ ê²½ë¡œë¨
 
         int* vv = &v[0];
         sort(con, vv,v.size());
         
         fout << endl << "path length: " << length << endl;
         cout << endl << "path length: " << length << endl;
-        //courseºÎºĞ Ãâ·Â
-        compression(v);//v¿¡´Â ÃÖ´Ü°æ·Î ¼øÀ¸·Î ÀúÀåµÇ¾îÀÖ´Ù.
+        //courseë¶€ë¶„ ì¶œë ¥
+        compression(v);//vì—ëŠ” ìµœë‹¨ê²½ë¡œ ìˆœìœ¼ë¡œ ì €ì¥ë˜ì–´ìˆë‹¤.
     }
     return Success;
 }
@@ -480,198 +489,198 @@ Result Manager::RabinKarpCompare(string ComparedString, string CompareString)
     int bs = ComparedString.length(), bh = 0;//big length,big hash=0
     int ws = CompareString.length(), wh = 0;//word length, word hash=0
     int power = 1, power_prev = 1, find = 0;
-    for (int i = 0; i <= bs - ws; i++) {//Å« ¹®ÀÚ¿­ Å©±â- Ã£´Â ´Ü¾îÅ©±â ¸¸Å­ ¹İº¹
+    for (int i = 0; i <= bs - ws; i++) {//í° ë¬¸ìì—´ í¬ê¸°- ì°¾ëŠ” ë‹¨ì–´í¬ê¸° ë§Œí¼ ë°˜ë³µ
         if (i == 0) {
             for (int k = 1; k <= ws; k++) {
-                bh = bh + ComparedString[ws - k] * power;//wordÀÇ Å©±â¸¸Å­ µÚ¿¡¼­ ¾ÕÀ¸·Î ¿À¸é¼­ ´õÇÏ±â
-                wh = wh + CompareString[ws - k] * power;//wordµµ µÚ¿¡¼­ ¾ÕÀ¸·Î ´õÇÏ±â
+                bh = bh + ComparedString[ws - k] * power;//wordì˜ í¬ê¸°ë§Œí¼ ë’¤ì—ì„œ ì•ìœ¼ë¡œ ì˜¤ë©´ì„œ ë”í•˜ê¸°
+                wh = wh + CompareString[ws - k] * power;//wordë„ ë’¤ì—ì„œ ì•ìœ¼ë¡œ ë”í•˜ê¸°
                 if (k < ws) { power = power * 2; }
             }
         }
         else {
-            bh = (bh - ComparedString[i - 1] * power) * 2 + ComparedString[i - 1 + ws];//ÀÌÀü²¨ »©ÁÖ°í ´ÙÀ½²¨ ´õÇÏ±â
+            bh = (bh - ComparedString[i - 1] * power) * 2 + ComparedString[i - 1 + ws];//ì´ì „êº¼ ë¹¼ì£¼ê³  ë‹¤ìŒêº¼ ë”í•˜ê¸°
         }
         if (bh == wh) {
             for (int q = 0; q < ws; q++) {
                 if (ComparedString[i + q] != CompareString[q]) { find = 0; break; }
-                else { find += 1; }//°°À¸¸é 1À» ´õÇØÁØ´Ù.
+                else { find += 1; }//ê°™ìœ¼ë©´ 1ì„ ë”í•´ì¤€ë‹¤.
             }
             if (find != 0) {
                 return Success;
             }
         }
     }
-    return LoadFileNotExist;//Ã£´Â °ÍÀÌ ¾øÀ» ‹š ¹İÈ¯ ÇÏ´Â ¿À·ù°¡ ¾ø¾î¼­ LoadFileNotExist·Î ´ë½ÅÇß´Ù.
+    return LoadFileNotExist;//ì°¾ëŠ” ê²ƒì´ ì—†ì„ Â‹Âš ë°˜í™˜ í•˜ëŠ” ì˜¤ë¥˜ê°€ ì—†ì–´ì„œ LoadFileNotExistë¡œ ëŒ€ì‹ í–ˆë‹¤.
 }
 
 
 Result Manager::Update() {
-     //1. ÁÖÀÎ ÀÌ¸§ 5°³ ÀÌ»ó °°Àº °¡°Ô(¼Ò¼öÁ¡ ¿Ã¸²À» 10%¿¡¼­ ÇÏ°í »°´Ù.)
+     //1. ì£¼ì¸ ì´ë¦„ 5ê°œ ì´ìƒ ê°™ì€ ê°€ê²Œ(ì†Œìˆ˜ì  ì˜¬ë¦¼ì„ 10%ì—ì„œ í•˜ê³  ëºë‹¤.)
     int len1 = 0,  col = 0;
     int m_vSize = m_graph.Size();
     double data = 0, de = 0;
     string a1, b1, temp;
-    Vertex* curv = m_graph.head();//head vertex¿¡¼­ ½ÃÀÛ
-    if (curv == NULL) { return FaildtoUpdatePath; }//ºñ±³ÇÒ °ªÀÌ ¾øÀ¸¸é ³¡
+    Vertex* curv = m_graph.head();//head vertexì—ì„œ ì‹œì‘
+    if (curv == NULL) { return FaildtoUpdatePath; }//ë¹„êµí•  ê°’ì´ ì—†ìœ¼ë©´ ë
     Vertex* cmpv = m_graph.head()->GetNext();
-    if (cmpv == NULL) { return Success; }//¾÷µ¥ÀÌÆ® ÇÒ°Ô ¾øÀ¸¸é ³¡³­´Ù.
+    if (cmpv == NULL) { return Success; }//ì—…ë°ì´íŠ¸ í• ê²Œ ì—†ìœ¼ë©´ ëë‚œë‹¤.
 
-    for (int i = 0; i < m_vSize - 1; i++) {//±âÁØ vertex
-        for (int j = i + 1; j < m_vSize; j++) {//ºñ±³µÉ vertex
-            a1 = curv->GetName(); //curvÀÇ ÁÖÀÎÀÌ¸§
-            b1 = cmpv->GetName(); //cmpvÀÇ ÁÖÀÎÀÌ¸§
-            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//¹®ÀÚ¿­ ÀüÃ¼ ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â(´ë¼Ò¹®ÀÚ ±¸ºĞx)
-            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//¹®ÀÚ¿­ ÀüÃ¼ ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â(´ë¼Ò¹®ÀÚ ±¸ºĞx)
-            len1 = a1.length(); //curvÀÇ ÁÖÀÎÀÌ¸§ ±æÀÌ
+    for (int i = 0; i < m_vSize - 1; i++) {//ê¸°ì¤€ vertex
+        for (int j = i + 1; j < m_vSize; j++) {//ë¹„êµë  vertex
+            a1 = curv->GetName(); //curvì˜ ì£¼ì¸ì´ë¦„
+            b1 = cmpv->GetName(); //cmpvì˜ ì£¼ì¸ì´ë¦„
+            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//ë¬¸ìì—´ ì „ì²´ ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°(ëŒ€ì†Œë¬¸ì êµ¬ë¶„x)
+            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//ë¬¸ìì—´ ì „ì²´ ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°(ëŒ€ì†Œë¬¸ì êµ¬ë¶„x)
+            len1 = a1.length(); //curvì˜ ì£¼ì¸ì´ë¦„ ê¸¸ì´
             col = 0;
             
             for (int l = 0; len1-l>=5; l++) {
-                temp = a1.substr(l, 5);//a1ÀÇ l¹øÂ° ºÎÅÍ 5±ÛÀÚ temp¿¡ ÀúÀå 
-                if (Success == RabinKarpCompare(b1, temp)) {//temp¿Í b1À» ºñ±³
-                    if (curv->FindEdge(j) != NULL) {//curvÀÇ edge¿¡ j·Î°¡´Â edge°¡ ÀÖ´Ù¸é ¼öÁ¤
-                        data = curv->FindEdge(j)->GetWeight();//weight doubleÇüÀ¸·Î ¹Ù²Ş
-                        if (curv->FindprevEdge(j) != NULL) {//head°¡ ¾Æ´Ò ¶§ »èÁ¦ÇÏ´Â edgeÀÇ ¾Õ µÚ ¿¬°á
-                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//»èÁ¦µÇ´Â edgeÀü°Í°ú »èÁ¦µÇ´Â edge ´ÙÀ½ °ÍÀ» ¿¬°á
+                temp = a1.substr(l, 5);//a1ì˜ lë²ˆì§¸ ë¶€í„° 5ê¸€ì tempì— ì €ì¥ 
+                if (Success == RabinKarpCompare(b1, temp)) {//tempì™€ b1ì„ ë¹„êµ
+                    if (curv->FindEdge(j) != NULL) {//curvì˜ edgeì— jë¡œê°€ëŠ” edgeê°€ ìˆë‹¤ë©´ ìˆ˜ì •
+                        data = curv->FindEdge(j)->GetWeight();//weight doubleí˜•ìœ¼ë¡œ ë°”ê¿ˆ
+                        if (curv->FindprevEdge(j) != NULL) {//headê°€ ì•„ë‹ ë•Œ ì‚­ì œí•˜ëŠ” edgeì˜ ì• ë’¤ ì—°ê²°
+                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//ì‚­ì œë˜ëŠ” edgeì „ê²ƒê³¼ ì‚­ì œë˜ëŠ” edge ë‹¤ìŒ ê²ƒì„ ì—°ê²°
                         }
-                        else {//headÀÏ ¶§ head ¹Ù²ãÁÖ±â
+                        else {//headì¼ ë•Œ head ë°”ê¿”ì£¼ê¸°
                             curv->sethead(curv->GetHeadOfEdge()->GetNext());
                         }
-                        delete curv->FindEdge(j);//edge»èÁ¦
-                        curv->sizedown();//size 1 °¨¼Ò
-                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.9)); }//data°¡ ¾ç¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        else if(data<0){ curv->AddEdge(cmpv->GetKey(), ceil(data * 1.1)); }//data°¡ À½¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        col = 1;//°°Àº ¹®ÀÚ°¡ ÀÖÀ¸¸é vertex¸¦ ³Ñ¾î°¡¾ßÇÑ´Ù(°°Àº ¹®ÀÚ¿­¿¡¼­ ¶Ç °°À» ¼öµµ ÀÖ¾î¼­)
+                        delete curv->FindEdge(j);//edgeì‚­ì œ
+                        curv->sizedown();//size 1 ê°ì†Œ
+                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.9)); }//dataê°€ ì–‘ìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        else if(data<0){ curv->AddEdge(cmpv->GetKey(), ceil(data * 1.1)); }//dataê°€ ìŒìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        col = 1;//ê°™ì€ ë¬¸ìê°€ ìˆìœ¼ë©´ vertexë¥¼ ë„˜ì–´ê°€ì•¼í•œë‹¤(ê°™ì€ ë¬¸ìì—´ì—ì„œ ë˜ ê°™ì„ ìˆ˜ë„ ìˆì–´ì„œ)
                     }
-                    if (cmpv->FindEdge(i) != NULL) {//cmpvÀÇ edge¿¡ i·Î°¡´Â edge°¡ ÀÖ´Ù¸é ¼öÁ¤
-                        data = cmpv->FindEdge(i)->GetWeight();//weight doubleÇüÀ¸·Î ¹Ù²Ş
-                        if (cmpv->FindprevEdge(i) != NULL) {//head°¡ ¾Æ´Ò ¶§ »èÁ¦ÇÏ´Â edgeÀÇ ¾Õ µÚ ¿¬°á
-                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());//»èÁ¦µÇ´Â edgeÀü°Í°ú »èÁ¦µÇ´Â edge ´ÙÀ½ °ÍÀ» ¿¬°á
+                    if (cmpv->FindEdge(i) != NULL) {//cmpvì˜ edgeì— ië¡œê°€ëŠ” edgeê°€ ìˆë‹¤ë©´ ìˆ˜ì •
+                        data = cmpv->FindEdge(i)->GetWeight();//weight doubleí˜•ìœ¼ë¡œ ë°”ê¿ˆ
+                        if (cmpv->FindprevEdge(i) != NULL) {//headê°€ ì•„ë‹ ë•Œ ì‚­ì œí•˜ëŠ” edgeì˜ ì• ë’¤ ì—°ê²°
+                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());//ì‚­ì œë˜ëŠ” edgeì „ê²ƒê³¼ ì‚­ì œë˜ëŠ” edge ë‹¤ìŒ ê²ƒì„ ì—°ê²°
                         }
-                        else {//headÀÏ ¶§ head ¹Ù²ãÁÖ±â
+                        else {//headì¼ ë•Œ head ë°”ê¿”ì£¼ê¸°
                             cmpv->sethead(cmpv->GetHeadOfEdge()->GetNext());
                         }
-                        delete cmpv->FindEdge(i);//edge»èÁ¦
-                        cmpv->sizedown();//size 1 °¨¼Ò
-                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.9)); }//data°¡ ¾ç¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        else if(data<0){ cmpv->AddEdge(curv->GetKey(), ceil(data * 1.1)); }//data°¡ À½¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        col = 1;//°°Àº ¹®ÀÚ°¡ ÀÖÀ¸¸é vertex¸¦ ³Ñ¾î°¡¾ßÇÑ´Ù(°°Àº ¹®ÀÚ¿­¿¡¼­ ¶Ç °°À» ¼öµµ ÀÖ¾î¼­)
+                        delete cmpv->FindEdge(i);//edgeì‚­ì œ
+                        cmpv->sizedown();//size 1 ê°ì†Œ
+                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.9)); }//dataê°€ ì–‘ìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        else if(data<0){ cmpv->AddEdge(curv->GetKey(), ceil(data * 1.1)); }//dataê°€ ìŒìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        col = 1;//ê°™ì€ ë¬¸ìê°€ ìˆìœ¼ë©´ vertexë¥¼ ë„˜ì–´ê°€ì•¼í•œë‹¤(ê°™ì€ ë¬¸ìì—´ì—ì„œ ë˜ ê°™ì„ ìˆ˜ë„ ìˆì–´ì„œ)
                     }
-                    if (col == 1) { break; }//´ÙÀ½ vertex
+                    if (col == 1) { break; }//ë‹¤ìŒ vertex
                 }
             }
-            cmpv = cmpv->GetNext(); //ºñ±³ÇÏ´Â vertex ÀÌµ¿
+            cmpv = cmpv->GetNext(); //ë¹„êµí•˜ëŠ” vertex ì´ë™
         }
-        curv = curv->GetNext();//±âÁØ vertex ÀÌµ¿
+        curv = curv->GetNext();//ê¸°ì¤€ vertex ì´ë™
         cmpv = curv->GetNext();
     }
 
 
-    //2. 1Àû¿ë ÀÌÈÄ ÀÌ¸§ÀÌ 10±ÛÀÚ µ¿ÀÏÇß´Ù¸é
-    curv = m_graph.head();//head vertex¿¡¼­ ½ÃÀÛ
+    //2. 1ì ìš© ì´í›„ ì´ë¦„ì´ 10ê¸€ì ë™ì¼í–ˆë‹¤ë©´
+    curv = m_graph.head();//head vertexì—ì„œ ì‹œì‘
     cmpv = m_graph.head()->GetNext();
 
-    for (int i = 0; i < m_vSize - 1; i++) {//±âÁØ vertex
-        for (int j = i + 1; j < m_vSize; j++) {//ºñ±³µÉ vertex
-            a1 = curv->GetName(); //curvÀÇ ÁÖÀÎÀÌ¸§
-            b1 = cmpv->GetName(); //cmpvÀÇ ÁÖÀÎÀÌ¸§
-            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//¹®ÀÚ¿­ ÀüÃ¼ ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â(´ë¼Ò¹®ÀÚ ±¸ºĞx)
-            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//¹®ÀÚ¿­ ÀüÃ¼ ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â(´ë¼Ò¹®ÀÚ ±¸ºĞx)
-            len1 = a1.length(); //curvÀÇ ÁÖÀÎÀÌ¸§ ±æÀÌ
+    for (int i = 0; i < m_vSize - 1; i++) {//ê¸°ì¤€ vertex
+        for (int j = i + 1; j < m_vSize; j++) {//ë¹„êµë  vertex
+            a1 = curv->GetName(); //curvì˜ ì£¼ì¸ì´ë¦„
+            b1 = cmpv->GetName(); //cmpvì˜ ì£¼ì¸ì´ë¦„
+            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//ë¬¸ìì—´ ì „ì²´ ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°(ëŒ€ì†Œë¬¸ì êµ¬ë¶„x)
+            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//ë¬¸ìì—´ ì „ì²´ ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°(ëŒ€ì†Œë¬¸ì êµ¬ë¶„x)
+            len1 = a1.length(); //curvì˜ ì£¼ì¸ì´ë¦„ ê¸¸ì´
             col = 0;
 
             for (int l = 0; len1 - l >= 10; l++) {
-                temp = a1.substr(l, 10);//a1ÀÇ l¹øÂ° ºÎÅÍ 5±ÛÀÚ temp¿¡ ÀúÀå
-                if (Success==RabinKarpCompare(b1, temp)) {//temp¿Í b1À» ºñ±³
-                    if (curv->FindEdge(j) != NULL) {//curvÀÇ edge¿¡ j·Î°¡´Â edge°¡ ÀÖ´Ù¸é ¼öÁ¤
-                        data = curv->FindEdge(j)->GetWeight();//weight doubleÇüÀ¸·Î ¹Ù²Ş
-                        if (curv->FindprevEdge(j) != NULL) {//head°¡ ¾Æ´Ò ¶§ »èÁ¦ÇÏ´Â edgeÀÇ ¾Õ µÚ ¿¬°á
-                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//»èÁ¦µÇ´Â edgeÀü°Í°ú »èÁ¦µÇ´Â edge ´ÙÀ½ °ÍÀ» ¿¬°á
+                temp = a1.substr(l, 10);//a1ì˜ lë²ˆì§¸ ë¶€í„° 5ê¸€ì tempì— ì €ì¥
+                if (Success==RabinKarpCompare(b1, temp)) {//tempì™€ b1ì„ ë¹„êµ
+                    if (curv->FindEdge(j) != NULL) {//curvì˜ edgeì— jë¡œê°€ëŠ” edgeê°€ ìˆë‹¤ë©´ ìˆ˜ì •
+                        data = curv->FindEdge(j)->GetWeight();//weight doubleí˜•ìœ¼ë¡œ ë°”ê¿ˆ
+                        if (curv->FindprevEdge(j) != NULL) {//headê°€ ì•„ë‹ ë•Œ ì‚­ì œí•˜ëŠ” edgeì˜ ì• ë’¤ ì—°ê²°
+                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//ì‚­ì œë˜ëŠ” edgeì „ê²ƒê³¼ ì‚­ì œë˜ëŠ” edge ë‹¤ìŒ ê²ƒì„ ì—°ê²°
                         }
-                        else {//headÀÏ ¶§ head ¹Ù²ãÁÖ±â
+                        else {//headì¼ ë•Œ head ë°”ê¿”ì£¼ê¸°
                             curv->sethead(curv->GetHeadOfEdge()->GetNext());
                         }
-                        delete curv->FindEdge(j);//edge»èÁ¦
-                        curv->sizedown();//size 1 °¨¼Ò
-                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.9)); }//data°¡ ¾ç¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        else if (data < 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 1.1)); }//data°¡ À½¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        col = 1;//°°Àº ¹®ÀÚ°¡ ÀÖÀ¸¸é vertex¸¦ ³Ñ¾î°¡¾ßÇÑ´Ù(°°Àº ¹®ÀÚ¿­¿¡¼­ ¶Ç °°À» ¼öµµ ÀÖ¾î¼­)
+                        delete curv->FindEdge(j);//edgeì‚­ì œ
+                        curv->sizedown();//size 1 ê°ì†Œ
+                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.9)); }//dataê°€ ì–‘ìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        else if (data < 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 1.1)); }//dataê°€ ìŒìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        col = 1;//ê°™ì€ ë¬¸ìê°€ ìˆìœ¼ë©´ vertexë¥¼ ë„˜ì–´ê°€ì•¼í•œë‹¤(ê°™ì€ ë¬¸ìì—´ì—ì„œ ë˜ ê°™ì„ ìˆ˜ë„ ìˆì–´ì„œ)
                     }
-                    if (cmpv->FindEdge(i) != NULL) {//cmpvÀÇ edge¿¡ i·Î°¡´Â edge°¡ ÀÖ´Ù¸é ¼öÁ¤
-                        data = cmpv->FindEdge(i)->GetWeight();//weight doubleÇüÀ¸·Î ¹Ù²Ş
-                        if (cmpv->FindprevEdge(i) != NULL) {//head°¡ ¾Æ´Ò ¶§ »èÁ¦ÇÏ´Â edgeÀÇ ¾Õ µÚ ¿¬°á
-                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());//»èÁ¦µÇ´Â edgeÀü°Í°ú »èÁ¦µÇ´Â edge ´ÙÀ½ °ÍÀ» ¿¬°á
+                    if (cmpv->FindEdge(i) != NULL) {//cmpvì˜ edgeì— ië¡œê°€ëŠ” edgeê°€ ìˆë‹¤ë©´ ìˆ˜ì •
+                        data = cmpv->FindEdge(i)->GetWeight();//weight doubleí˜•ìœ¼ë¡œ ë°”ê¿ˆ
+                        if (cmpv->FindprevEdge(i) != NULL) {//headê°€ ì•„ë‹ ë•Œ ì‚­ì œí•˜ëŠ” edgeì˜ ì• ë’¤ ì—°ê²°
+                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());//ì‚­ì œë˜ëŠ” edgeì „ê²ƒê³¼ ì‚­ì œë˜ëŠ” edge ë‹¤ìŒ ê²ƒì„ ì—°ê²°
                         }
-                        else {//headÀÏ ¶§ head ¹Ù²ãÁÖ±â
+                        else {//headì¼ ë•Œ head ë°”ê¿”ì£¼ê¸°
                             cmpv->sethead(cmpv->GetHeadOfEdge()->GetNext());
                         }
-                        delete cmpv->FindEdge(i);//edge»èÁ¦
-                        cmpv->sizedown();//size 1 °¨¼Ò
-                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.9)); }//data°¡ ¾ç¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        else if (data < 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 1.1)); }//data°¡ À½¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        col = 1;//°°Àº ¹®ÀÚ°¡ ÀÖÀ¸¸é vertex¸¦ ³Ñ¾î°¡¾ßÇÑ´Ù(°°Àº ¹®ÀÚ¿­¿¡¼­ ¶Ç °°À» ¼öµµ ÀÖ¾î¼­)
+                        delete cmpv->FindEdge(i);//edgeì‚­ì œ
+                        cmpv->sizedown();//size 1 ê°ì†Œ
+                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.9)); }//dataê°€ ì–‘ìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        else if (data < 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 1.1)); }//dataê°€ ìŒìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        col = 1;//ê°™ì€ ë¬¸ìê°€ ìˆìœ¼ë©´ vertexë¥¼ ë„˜ì–´ê°€ì•¼í•œë‹¤(ê°™ì€ ë¬¸ìì—´ì—ì„œ ë˜ ê°™ì„ ìˆ˜ë„ ìˆì–´ì„œ)
                     }
-                    if (col == 1) { break; }//´ÙÀ½ vertex
+                    if (col == 1) { break; }//ë‹¤ìŒ vertex
                 }
             }
-            cmpv = cmpv->GetNext(); //ºñ±³ÇÏ´Â vertex ÀÌµ¿
+            cmpv = cmpv->GetNext(); //ë¹„êµí•˜ëŠ” vertex ì´ë™
         }
-        curv = curv->GetNext();//±âÁØ vertex ÀÌµ¿
+        curv = curv->GetNext();//ê¸°ì¤€ vertex ì´ë™
         cmpv = curv->GetNext();
     }
     
 
-    //3. °£ÆÇ¸íÀÌ ÇÑ ´Ü¾î ÀÌ»ó °°Àº °¡°Ô
-    curv = m_graph.head();//head vertex¿¡¼­ ½ÃÀÛ
+    //3. ê°„íŒëª…ì´ í•œ ë‹¨ì–´ ì´ìƒ ê°™ì€ ê°€ê²Œ
+    curv = m_graph.head();//head vertexì—ì„œ ì‹œì‘
     cmpv = m_graph.head()->GetNext();
 
-    for (int i = 0; i < m_vSize - 1; i++) {//±âÁØ vertex
-        for (int j = i + 1; j < m_vSize; j++) {//ºñ±³µÉ vertex
-            a1 = curv->Getstore(); //curvÀÇ °£ÆÇ¸í
-            b1 = cmpv->Getstore(); //cmpvÀÇ °£ÆÇ¸í
-            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//¹®ÀÚ¿­ ÀüÃ¼ ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â(´ë¼Ò¹®ÀÚ ±¸ºĞx)
-            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//¹®ÀÚ¿­ ÀüÃ¼ ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â(´ë¼Ò¹®ÀÚ ±¸ºĞx)
-            len1 = a1.length(); //curvÀÇ °£ÆÇ¸í ±æÀÌ
+    for (int i = 0; i < m_vSize - 1; i++) {//ê¸°ì¤€ vertex
+        for (int j = i + 1; j < m_vSize; j++) {//ë¹„êµë  vertex
+            a1 = curv->Getstore(); //curvì˜ ê°„íŒëª…
+            b1 = cmpv->Getstore(); //cmpvì˜ ê°„íŒëª…
+            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//ë¬¸ìì—´ ì „ì²´ ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°(ëŒ€ì†Œë¬¸ì êµ¬ë¶„x)
+            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//ë¬¸ìì—´ ì „ì²´ ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°(ëŒ€ì†Œë¬¸ì êµ¬ë¶„x)
+            len1 = a1.length(); //curvì˜ ê°„íŒëª… ê¸¸ì´
             col = 0;
             
             istringstream iss(a1);
             string token;
             while (getline(iss, token, ' ')) {
-                if(Success == RabinKarpCompare(b1,token)){//°£ÆÇ¸í¿¡ °°Àº ´Ü¾î°¡ ÀÖ´Ù¸é
+                if(Success == RabinKarpCompare(b1,token)){//ê°„íŒëª…ì— ê°™ì€ ë‹¨ì–´ê°€ ìˆë‹¤ë©´
 
-                    if (curv->FindEdge(j) != NULL) {//curvÀÇ edge¿¡ j·Î°¡´Â edge°¡ ÀÖ´Ù¸é ¼öÁ¤
-                        data = curv->FindEdge(j)->GetWeight();//weight doubleÇüÀ¸·Î ¹Ù²Ş
-                        if (curv->FindprevEdge(j) != NULL) {//head°¡ ¾Æ´Ò ¶§ »èÁ¦ÇÏ´Â edgeÀÇ ¾Õ µÚ ¿¬°á
-                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//»èÁ¦µÇ´Â edgeÀü°Í°ú »èÁ¦µÇ´Â edge ´ÙÀ½ °ÍÀ» ¿¬°á
+                    if (curv->FindEdge(j) != NULL) {//curvì˜ edgeì— jë¡œê°€ëŠ” edgeê°€ ìˆë‹¤ë©´ ìˆ˜ì •
+                        data = curv->FindEdge(j)->GetWeight();//weight doubleí˜•ìœ¼ë¡œ ë°”ê¿ˆ
+                        if (curv->FindprevEdge(j) != NULL) {//headê°€ ì•„ë‹ ë•Œ ì‚­ì œí•˜ëŠ” edgeì˜ ì• ë’¤ ì—°ê²°
+                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//ì‚­ì œë˜ëŠ” edgeì „ê²ƒê³¼ ì‚­ì œë˜ëŠ” edge ë‹¤ìŒ ê²ƒì„ ì—°ê²°
                         }
-                        else {//headÀÏ ¶§ head ¹Ù²ãÁÖ±â
+                        else {//headì¼ ë•Œ head ë°”ê¿”ì£¼ê¸°
                             curv->sethead(curv->GetHeadOfEdge()->GetNext());
                         }
-                        delete curv->FindEdge(j);//edge»èÁ¦
-                        curv->sizedown();//size 1 °¨¼Ò
-                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.8)); }//data°¡ ¾ç¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        else if (data < 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 1.2)); }//data°¡ À½¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        col = 1;//°°Àº ¹®ÀÚ°¡ ÀÖÀ¸¸é vertex¸¦ ³Ñ¾î°¡¾ßÇÑ´Ù(°°Àº ¹®ÀÚ¿­¿¡¼­ ¶Ç °°À» ¼öµµ ÀÖ¾î¼­)
+                        delete curv->FindEdge(j);//edgeì‚­ì œ
+                        curv->sizedown();//size 1 ê°ì†Œ
+                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.8)); }//dataê°€ ì–‘ìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        else if (data < 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 1.2)); }//dataê°€ ìŒìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        col = 1;//ê°™ì€ ë¬¸ìê°€ ìˆìœ¼ë©´ vertexë¥¼ ë„˜ì–´ê°€ì•¼í•œë‹¤(ê°™ì€ ë¬¸ìì—´ì—ì„œ ë˜ ê°™ì„ ìˆ˜ë„ ìˆì–´ì„œ)
                     }
-                    if (cmpv->FindEdge(i) != NULL) {//cmpvÀÇ edge¿¡ i·Î°¡´Â edge°¡ ÀÖ´Ù¸é ¼öÁ¤
-                        data = cmpv->FindEdge(i)->GetWeight();//weight doubleÇüÀ¸·Î ¹Ù²Ş
-                        if (cmpv->FindprevEdge(i) != NULL) {//head°¡ ¾Æ´Ò ¶§ »èÁ¦ÇÏ´Â edgeÀÇ ¾Õ µÚ ¿¬°á
-                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());//»èÁ¦µÇ´Â edgeÀü°Í°ú »èÁ¦µÇ´Â edge ´ÙÀ½ °ÍÀ» ¿¬°á
+                    if (cmpv->FindEdge(i) != NULL) {//cmpvì˜ edgeì— ië¡œê°€ëŠ” edgeê°€ ìˆë‹¤ë©´ ìˆ˜ì •
+                        data = cmpv->FindEdge(i)->GetWeight();//weight doubleí˜•ìœ¼ë¡œ ë°”ê¿ˆ
+                        if (cmpv->FindprevEdge(i) != NULL) {//headê°€ ì•„ë‹ ë•Œ ì‚­ì œí•˜ëŠ” edgeì˜ ì• ë’¤ ì—°ê²°
+                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());//ì‚­ì œë˜ëŠ” edgeì „ê²ƒê³¼ ì‚­ì œë˜ëŠ” edge ë‹¤ìŒ ê²ƒì„ ì—°ê²°
                         }
-                        else {//headÀÏ ¶§ head ¹Ù²ãÁÖ±â
+                        else {//headì¼ ë•Œ head ë°”ê¿”ì£¼ê¸°
                             cmpv->sethead(cmpv->GetHeadOfEdge()->GetNext());
                         }
-                        delete cmpv->FindEdge(i);//edge»èÁ¦
-                        cmpv->sizedown();//size 1 °¨¼Ò
-                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.8)); }//data°¡ ¾ç¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        else if (data < 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 1.2)); }//data°¡ À½¼öÀÏ ¶§ »õ·Î¿î edge»ı¼º
-                        col = 1;//°°Àº ¹®ÀÚ°¡ ÀÖÀ¸¸é vertex¸¦ ³Ñ¾î°¡¾ßÇÑ´Ù(°°Àº ¹®ÀÚ¿­¿¡¼­ ¶Ç °°À» ¼öµµ ÀÖ¾î¼­)
+                        delete cmpv->FindEdge(i);//edgeì‚­ì œ
+                        cmpv->sizedown();//size 1 ê°ì†Œ
+                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.8)); }//dataê°€ ì–‘ìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        else if (data < 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 1.2)); }//dataê°€ ìŒìˆ˜ì¼ ë•Œ ìƒˆë¡œìš´ edgeìƒì„±
+                        col = 1;//ê°™ì€ ë¬¸ìê°€ ìˆìœ¼ë©´ vertexë¥¼ ë„˜ì–´ê°€ì•¼í•œë‹¤(ê°™ì€ ë¬¸ìì—´ì—ì„œ ë˜ ê°™ì„ ìˆ˜ë„ ìˆì–´ì„œ)
                     }
                 }
                 if (col == 1) { break; }
             }
-            cmpv = cmpv->GetNext(); //ºñ±³ÇÏ´Â vertex ÀÌµ¿
+            cmpv = cmpv->GetNext(); //ë¹„êµí•˜ëŠ” vertex ì´ë™
         }
-        curv = curv->GetNext();//±âÁØ vertex ÀÌµ¿
+        curv = curv->GetNext();//ê¸°ì¤€ vertex ì´ë™
         cmpv = curv->GetNext();
     }
     return Success;
@@ -680,48 +689,48 @@ Result Manager::Update() {
 
 void Manager::sort(string type, int* v,int n) {
     if (type == "quick") {
-        //chrono::system_clock::time_point start = chrono::system_clock::now();//ÇöÀç ½Ã°£À» start¿¡ ÀúÀå
+        //chrono::system_clock::time_point start = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ startì— ì €ì¥
         quick(0, n - 1, v);
-       // chrono::system_clock::time_point end = chrono::system_clock::now();//ÇöÀç ½Ã°£À» end¿¡ ÀúÀå
+       // chrono::system_clock::time_point end = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ endì— ì €ì¥
         //chrono::nanoseconds nano = end - start;
     }
 
     else if (type == "insert") {
         int val,j;
-        //chrono::system_clock::time_point start = chrono::system_clock::now();//ÇöÀç ½Ã°£À» start¿¡ ÀúÀå
+        //chrono::system_clock::time_point start = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ startì— ì €ì¥
         for (int i = 0; i < n; i++) {
             val = v[i];
             for ( j = i - 1; j >= 0; j--) {
-                if (v[j] > val) { v[j + 1] = v[j]; continue; }//¾ÕÀÚ¸®¸¦ ÇÏ³ª¾¿ º¸¸é¼­ ¾ÕÀÚ¸®°¡ ´õ Å©¸é µÚ·Î º¸³»±â
+                if (v[j] > val) { v[j + 1] = v[j]; continue; }//ì•ìë¦¬ë¥¼ í•˜ë‚˜ì”© ë³´ë©´ì„œ ì•ìë¦¬ê°€ ë” í¬ë©´ ë’¤ë¡œ ë³´ë‚´ê¸°
                 break;
             }
-            v[j + 1] = val; //±× ÀÚ¸®¿¡ key°ªÀ» ³Ö´Â´Ù.
+            v[j + 1] = val; //ê·¸ ìë¦¬ì— keyê°’ì„ ë„£ëŠ”ë‹¤.
         }
-        //chrono::system_clock::time_point end = chrono::system_clock::now();//ÇöÀç ½Ã°£À» end¿¡ ÀúÀå
+        //chrono::system_clock::time_point end = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ endì— ì €ì¥
        // chrono::nanoseconds nano = end - start;
     }
 
     else if (type == "merge") {
-        //chrono::system_clock::time_point start = chrono::system_clock::now();//ÇöÀç ½Ã°£À» start¿¡ ÀúÀå
+        //chrono::system_clock::time_point start = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ startì— ì €ì¥
         merge_sort(v, 0, n - 1);
-        //chrono::system_clock::time_point end = chrono::system_clock::now();//ÇöÀç ½Ã°£À» end¿¡ ÀúÀå
+        //chrono::system_clock::time_point end = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ endì— ì €ì¥
         //chrono::nanoseconds nano = end - start;
     }
 
     else if (type == "heap") {
         MinHeap<int, int> heap;
-        //chrono::system_clock::time_point start = chrono::system_clock::now();//ÇöÀç ½Ã°£À» start¿¡ ÀúÀå
+        //chrono::system_clock::time_point start = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ startì— ì €ì¥
         for (int i = 0; i < n; i++) {heap.Push(v[i], 0);}
         for (int i = 0; i < n; i++) { v[i] = heap.Top().first; heap.Pop(); }
-        //chrono::system_clock::time_point end = chrono::system_clock::now();//ÇöÀç ½Ã°£À» end¿¡ ÀúÀå
+        //chrono::system_clock::time_point end = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ endì— ì €ì¥
        // chrono::nanoseconds nano = end - start;
 
 
     }
     else if (type == "bubble") {
         int temp = 0;
-        //chrono::system_clock::time_point start = chrono::system_clock::now();//ÇöÀç ½Ã°£À» start¿¡ ÀúÀå
-        //¿À¸§Â÷¼øÁ¤·Ä
+        //chrono::system_clock::time_point start = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ startì— ì €ì¥
+        //ì˜¤ë¦„ì°¨ìˆœì •ë ¬
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (v[j] > v[j + 1]) {
@@ -731,13 +740,13 @@ void Manager::sort(string type, int* v,int n) {
                 }
             }
         }
-        //chrono::system_clock::time_point end = chrono::system_clock::now();//ÇöÀç ½Ã°£À» end¿¡ ÀúÀå
+        //chrono::system_clock::time_point end = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ endì— ì €ì¥
        // chrono::nanoseconds nano = end - start;
         
     }
     else if (type == "selection") {
         int min, tmp;
-        //chrono::system_clock::time_point start = chrono::system_clock::now();//ÇöÀç ½Ã°£À» start¿¡ ÀúÀå
+        //chrono::system_clock::time_point start = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ startì— ì €ì¥
         for (int i = 0; i < n - 1; i++) {
             min = i;
             for (int j = i + 1; j < n; j++)
@@ -748,7 +757,7 @@ void Manager::sort(string type, int* v,int n) {
                 v[i] = tmp;
             }
         }
-        //chrono::system_clock::time_point end = chrono::system_clock::now();//ÇöÀç ½Ã°£À» end¿¡ ÀúÀå
+        //chrono::system_clock::time_point end = chrono::system_clock::now();//í˜„ì¬ ì‹œê°„ì„ endì— ì €ì¥
        // chrono::nanoseconds nano = end - start;
     }
 
@@ -778,13 +787,13 @@ void Manager::quick(int i, int j, int* v) {
 }
 
 void Manager::merge(int* v, int left, int right) {
-    int middle = (left + right) / 2;       //Àü´Ş¹ŞÀº left¿Í rightÀÇ Áß°£ÁöÁ¡ middle¿¡ ÀúÀå
-    int i = left, j = middle + 1, k = left;//i,k´Â ¿ŞÂÊ¿¡¼­ Áõ°¡, j´Â Áß°£¿¡¼­ Áõ°¡
-    int temp[200];//Á¤·ÄÇÏ´Â °ªÀ» Áß°£¿¡ ÀúÀåÇØµÎ´Â ¹è¿­
+    int middle = (left + right) / 2;       //ì „ë‹¬ë°›ì€ leftì™€ rightì˜ ì¤‘ê°„ì§€ì  middleì— ì €ì¥
+    int i = left, j = middle + 1, k = left;//i,këŠ” ì™¼ìª½ì—ì„œ ì¦ê°€, jëŠ” ì¤‘ê°„ì—ì„œ ì¦ê°€
+    int temp[200];//ì •ë ¬í•˜ëŠ” ê°’ì„ ì¤‘ê°„ì— ì €ì¥í•´ë‘ëŠ” ë°°ì—´
 
-    while (i <= middle) {//i°¡ Áß°£±îÁö ¿À¸é ³¡
-        if (j > right) { break; }//j°¡ ³¡±îÁö ÀÌµ¿ÇÏ¸é ³¡
-        if (v[i] <= v[j]) {//¿ŞÂÊ°ú Áß°£ °ªÀ» ºñ±³
+    while (i <= middle) {//iê°€ ì¤‘ê°„ê¹Œì§€ ì˜¤ë©´ ë
+        if (j > right) { break; }//jê°€ ëê¹Œì§€ ì´ë™í•˜ë©´ ë
+        if (v[i] <= v[j]) {//ì™¼ìª½ê³¼ ì¤‘ê°„ ê°’ì„ ë¹„êµ
             temp[k] = v[i];
             k += 1;
             i += 1;
@@ -804,32 +813,32 @@ void Manager::merge_sort(int* v, int left, int right) {
     int middle;
     if (left >= right) { return; }
     middle = (left + right) / 2;
-    merge_sort(v, left, middle);       //Àç±Íµ¿ÀÛ
-    merge_sort(v, middle + 1, right);  //Àç±Íµ¿ÀÛ
+    merge_sort(v, left, middle);       //ì¬ê·€ë™ì‘
+    merge_sort(v, middle + 1, right);  //ì¬ê·€ë™ì‘
     merge(v, left, right);
 }
 
 void Manager::compression(vector<int> v) {
     string s;
-    //1.2¹øÀÌ»ó ¹®ÀÚ¿­ µîÀå½Ã °¡Àå ±ä ¹®ÀÚ¿­ ¾ĞÃà
-    //s¿¡ ¹®ÀÚ¿­ ¿¬°áÇØ¼­ ³Ö¾îÁÖ±â
+    //1.2ë²ˆì´ìƒ ë¬¸ìì—´ ë“±ì¥ì‹œ ê°€ì¥ ê¸´ ë¬¸ìì—´ ì••ì¶•
+    //sì— ë¬¸ìì—´ ì—°ê²°í•´ì„œ ë„£ì–´ì£¼ê¸°
     for (int i = 0; i < v.size(); i++) {s.append(m_graph.FindVertex(v[i])->ns);}
     
-    string c = s;//c¿¡ sÀúÀå
-    transform(s.begin(), s.end(), s.begin(), tolower);//s¸¦ ¼Ò¹®ÀÚ·Î ¹Ù²Û´Ù.
+    string c = s;//cì— sì €ì¥
+    transform(s.begin(), s.end(), s.begin(), tolower);//së¥¼ ì†Œë¬¸ìë¡œ ë°”ê¾¼ë‹¤.
     cout << c << endl;
 
-    int answer = 0;//answer´Â ¾ĞÃàÇÒ ´Ü¾î±æÀÌ
+    int answer = 0;//answerëŠ” ì••ì¶•í•  ë‹¨ì–´ê¸¸ì´
     int bre = 0, start_point = 0;
 
 
-    for (int i = 1; i <= s.length() / 2; i++) {//¹®ÀÚ¿­ ±æÀÌÀÇ ¹İ¸¸ µ·´Ù.
+    for (int i = 1; i <= s.length() / 2; i++) {//ë¬¸ìì—´ ê¸¸ì´ì˜ ë°˜ë§Œ ëˆë‹¤.
         bre = 0;
-        //¹®ÀÚ¿­À» ÀüÃ¼ µ¹¸é¼­ ¹İº¹
-        for (int j = 0; j < s.length(); j++) {//¹®ÀÚ¿­ ÀüÃ¼¸¦ µ·´Ù, j´Â 0ºÎÅÍ
-            //ºÎºĞ ºñ±³ÇÏ±â
+        //ë¬¸ìì—´ì„ ì „ì²´ ëŒë©´ì„œ ë°˜ë³µ
+        for (int j = 0; j < s.length(); j++) {//ë¬¸ìì—´ ì „ì²´ë¥¼ ëˆë‹¤, jëŠ” 0ë¶€í„°
+            //ë¶€ë¶„ ë¹„êµí•˜ê¸°
             for (int z = i; j + z + i <= s.length(); z++) {//count=0,
-                //j¹øÂ°ºÎÅÍ i¸¸Å­¹®ÀÚ¿Í j+z¿¡¼­ºÎÅÍ i¹øÂ° ¹®ÀÚ°¡ °°À¸¸é count 1Áõ°¡
+                //jë²ˆì§¸ë¶€í„° ië§Œí¼ë¬¸ìì™€ j+zì—ì„œë¶€í„° ië²ˆì§¸ ë¬¸ìê°€ ê°™ìœ¼ë©´ count 1ì¦ê°€
                 if (Success==RabinKarpCompare(s.substr(j, i), s.substr(j + z, i))) {
                     answer = i; bre = 1; start_point = j;
                     break;
@@ -842,32 +851,32 @@ void Manager::compression(vector<int> v) {
     int i = answer, gap = 0;
     cout << answer<<endl;
     bre = 0;
-    //z´Â ¾ĞÃàÇÒ ¹®ÀÚ ½ÃÀÛ À§Ä¡+¾ĞÃà ¹®ÀÚ ±æÀÌ(Ã¹ ¾ĞÃà¹®ÀÚ ´ÙÀ½ À§Ä¡ºÎÅÍ È®ÀÎ)
+    //zëŠ” ì••ì¶•í•  ë¬¸ì ì‹œì‘ ìœ„ì¹˜+ì••ì¶• ë¬¸ì ê¸¸ì´(ì²« ì••ì¶•ë¬¸ì ë‹¤ìŒ ìœ„ì¹˜ë¶€í„° í™•ì¸)
     for (int z = i + start_point; z + i <= s.length(); z++) {
         if (Success==RabinKarpCompare(s.substr(start_point, i), s.substr(z, i))) {
-            c.erase(z - gap, i);//¼Ò¹®ÀÚ·Î ¹Ù²îÁö ¾ÊÀº ¹®ÀÚ¿­¿¡¼­ »èÁ¦
-            gap = gap + i;//¼Ò¹®ÀÚ·Î ¹Ù²îÁö ¾ÊÀº ¹®ÀÚ¿­Àº »èÁ¦ ¾ÈÇÏ±â ¶§¹®¿¡ gapÀ¸·Î ±æÀÌ ÁÙÀÌ±â
-            z += i;//»èÁ¦¸¦ ÇßÀ¸¸é ¹®ÀÚ°¡ »ç¶óÁö±â ¶§¹®¿¡ ¼Ò¹®ÀÚ ¹®ÀÚ¿­¿¡¼­ ±×¸¸Å­ ÀÌµ¿
-            if (bre == 0) { gap -= 1; c.insert(start_point + i, 1, '*'); }//¸Ç ¾Õ ¹®ÀÚ¿¡ *ºÙÀÌ±â
+            c.erase(z - gap, i);//ì†Œë¬¸ìë¡œ ë°”ë€Œì§€ ì•Šì€ ë¬¸ìì—´ì—ì„œ ì‚­ì œ
+            gap = gap + i;//ì†Œë¬¸ìë¡œ ë°”ë€Œì§€ ì•Šì€ ë¬¸ìì—´ì€ ì‚­ì œ ì•ˆí•˜ê¸° ë•Œë¬¸ì— gapìœ¼ë¡œ ê¸¸ì´ ì¤„ì´ê¸°
+            z += i;//ì‚­ì œë¥¼ í–ˆìœ¼ë©´ ë¬¸ìê°€ ì‚¬ë¼ì§€ê¸° ë•Œë¬¸ì— ì†Œë¬¸ì ë¬¸ìì—´ì—ì„œ ê·¸ë§Œí¼ ì´ë™
+            if (bre == 0) { gap -= 1; c.insert(start_point + i, 1, '*'); }//ë§¨ ì• ë¬¸ìì— *ë¶™ì´ê¸°
             bre = 1;
         }
     }
 
     
-    //2. shop, class, academy´Â 1¹ø¸¸ ³ª¿À°Ô ÇÏ±â
-    for (int q = 0; q < 3; q++) {//ÃÑ 3¹ø ¹İº¹ shop->class->academy
+    //2. shop, class, academyëŠ” 1ë²ˆë§Œ ë‚˜ì˜¤ê²Œ í•˜ê¸°
+    for (int q = 0; q < 3; q++) {//ì´ 3ë²ˆ ë°˜ë³µ shop->class->academy
         s = c;
-        transform(s.begin(), s.end(), s.begin(), tolower);//s¸¦ ¼Ò¹®ÀÚ·Î ¹Ù²Û´Ù.
+        transform(s.begin(), s.end(), s.begin(), tolower);//së¥¼ ì†Œë¬¸ìë¡œ ë°”ê¾¼ë‹¤.
         string du="shop";
         if (q == 1) { du = "class"; }
         else if (q == 2) { du = "academy"; }
         int wn = du.length(), col = 0, gap = 0;
-        for (int j = 0; j+wn <= s.length(); j++) {//¹®ÀÚ¿­ ÀüÃ¼¸¦ µ·´Ù, j´Â 0ºÎÅÍ
+        for (int j = 0; j+wn <= s.length(); j++) {//ë¬¸ìì—´ ì „ì²´ë¥¼ ëˆë‹¤, jëŠ” 0ë¶€í„°
             if (Success == RabinKarpCompare(s.substr(j, wn), du)) {
                 col += 1;
                 if(col!=1){
-                    c.erase(j - gap, wn);//¼Ò¹®ÀÚ·Î ¹Ù²îÁö ¾ÊÀº ¹®ÀÚ¿­¿¡¼­ »èÁ¦
-                    gap = gap + wn;//¼Ò¹®ÀÚ·Î ¹Ù²îÁö ¾ÊÀº ¹®ÀÚ¿­Àº »èÁ¦ ¾ÈÇÏ±â ¶§¹®¿¡ gapÀ¸·Î ±æÀÌ ÁÙÀÌ±â
+                    c.erase(j - gap, wn);//ì†Œë¬¸ìë¡œ ë°”ë€Œì§€ ì•Šì€ ë¬¸ìì—´ì—ì„œ ì‚­ì œ
+                    gap = gap + wn;//ì†Œë¬¸ìë¡œ ë°”ë€Œì§€ ì•Šì€ ë¬¸ìì—´ì€ ì‚­ì œ ì•ˆí•˜ê¸° ë•Œë¬¸ì— gapìœ¼ë¡œ ê¸¸ì´ ì¤„ì´ê¸°
                 }
             }
         }
