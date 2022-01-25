@@ -282,14 +282,14 @@ Result Manager::Load(const char* filepath)
 }
 
 
-/// <summary>
-/// print out the graph as matrix form
-/// </summary>
-///
-/// <returns>
-/// Result::Success if the printing is successful
-/// Result::GraphNotExist if there is no graph
-/// </returns>
+// <summary>
+// print out the graph as matrix form
+// </summary>
+//
+// <returns>
+// Result::Success if the printing is successful
+// Result::GraphNotExist if there is no graph
+// </returns>
 Result Manager::Print()
 {
     if (m_graph.head() == NULL) { return GraphNotExist; }
@@ -298,21 +298,21 @@ Result Manager::Print()
 
 
 
-/// <summary>
-/// find the path from startVertexKey to endVertexKey with BFS (stack and queue)
-/// </summary>
-///
-/// <param name="startVertexKey">
-/// the start vertex key
-/// </param>
-/// <param name="endVertexKey">
-/// the end vertex key
-/// </param>
-///
-/// <returns>
-/// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
-/// Result::Success otherwise.
-/// </returns>
+// <summary>
+// find the path from startVertexKey to endVertexKey with BFS (stack and queue)
+// </summary>
+//
+// <param name="startVertexKey">
+// the start vertex key
+// </param>
+// <param name="endVertexKey">
+// the end vertex key
+// </param>
+//
+// <returns>
+// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
+// Result::Success otherwise.
+// </returns>
 Result Manager::FindPathBfs(int startVertexKey, int endVertexKey)
 {
     if(m_graph.head() == NULL) { return GraphNotExist; }
@@ -343,21 +343,21 @@ Result Manager::FindPathBfs(int startVertexKey, int endVertexKey)
     return Success;
 }
 
-/// <summary>
-/// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
-/// </summary>
-///
-/// <param name="startVertexKey">
-/// the start vertex key
-/// </param>
-/// <param name="endVertexKey">
-/// the end vertex key
-/// </param>
-///
-/// <returns>
-/// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
-/// Result::Success otherwise.
-/// </returns>
+// <summary>
+// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
+// </summary>
+//
+// <param name="startVertexKey">
+// the start vertex key
+// </param>
+// <param name="endVertexKey">
+// the end vertex key
+// </param>
+//
+// <returns>
+// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
+// Result::Success otherwise.
+// </returns>
 Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey)
 {
     if (m_graph.head() == NULL) { return GraphNotExist; }
@@ -384,21 +384,21 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
     return Success;
 }
 
-/// <summary>
-/// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
-/// </summary>
-///
-/// <param name="startVertexKey">
+// <summary>
+// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
+// </summary>
+//
+// <param name="startVertexKey">
 /// the start vertex key
-/// </param>
-/// <param name="endVertexKey">
-/// the end vertex key
-/// </param>
-///
-/// <returns>
-/// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
-/// Result::Success otherwise.
-/// </returns>
+// </param>
+// <param name="endVertexKey">
+// the end vertex key
+// </param>
+//
+// <returns>
+// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
+// Result::Success otherwise.
+// </returns>
 Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey)
 {
     if (m_graph.head() == NULL) { return GraphNotExist; }
@@ -427,21 +427,21 @@ Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int end
     return Success;
 }
 
-/// <summary>
-/// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
-/// </summary>
-///
-/// <param name="startVertexKey">
-/// the start vertex key
-/// </param>
-/// <param name="endVertexKey">
-/// the end vertex key
-/// </param>
-///
-/// <returns>
-/// Result::InvalidVertexKey or Result::GraphNotExist or Result::NegativeCycleDetected if exception has occurred.
-/// Result::Success otherwise.
-/// </returns>
+// <summary>
+// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
+// </summary>
+//
+// <param name="startVertexKey">
+// the start vertex key
+// </param>
+// <param name="endVertexKey">
+// the end vertex key
+// </param>
+//
+// <returns>
+// Result::InvalidVertexKey or Result::GraphNotExist or Result::NegativeCycleDetected if exception has occurred.
+// Result::Success otherwise.
+// </returns>
 Result Manager::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey)
 {
 
@@ -885,6 +885,4 @@ void Manager::compression(vector<int> v) {
     fout << endl << "Course : " << c << endl;
     cout << endl << "Course : " << c << endl;
     return;
-   
-
 }
