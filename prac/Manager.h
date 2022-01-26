@@ -27,8 +27,6 @@ private:
     // graph instance to manage the vertics.
     Graph m_graph;
 
-
-    //내가 추가로 넣음
     ifstream fin;
     string con="bubble";
 
