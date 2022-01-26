@@ -17,8 +17,6 @@ class Manager
 private:
     // the filepath for the result log
     const char* RESULT_LOG_PATH = "log.txt";
-    // the filepath for the error log
-
 
     // the file stream for the result log
     std::ofstream fout;
