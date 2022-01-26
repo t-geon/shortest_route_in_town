@@ -17,17 +17,17 @@ public:
         m_vec.push_back(std::make_pair(a1, a2));
     }
 
-    /// <summary>
-    /// insert key-value pair
-    /// </summary>
-    ///
-    /// <param name="key">
-    /// the key that is used for sorting
-    /// </param>
-    ///
-    /// <param name="value">
-    /// the value that is managed in this heap
-    /// </param>
+    // <summary>
+    // insert key-value pair
+    // </summary>
+    //
+    // <param name="key">
+    // the key that is used for sorting
+    // </param>
+    //
+    // <param name="value">
+    // the value that is managed in this heap
+    // </param>
     void Push(TKey key, TValue value) {
         m_vec.push_back(std::make_pair(key, value));
         for (int i = m_vec.size() - 1; i > 1; i = i / 2) {
@@ -36,21 +36,21 @@ public:
     }
 
 
-    /// <summary>
-    /// remove the minimum element
-    /// </summary>
+    // <summary>
+    // remove the minimum element
+    // </summary>
     void Pop() {
         if (m_vec.size() == 1) { return; }
-        swap(m_vec[1], m_vec[m_vec.size() - 1]);//¸Ç µÚ °ªÀ» ¸Ç À§·Î ¿Ã¸®±â
-        m_vec.pop_back();//head»èÁ¦
+        swap(m_vec[1], m_vec[m_vec.size() - 1]);//ë§¨ ë’¤ ê°’ì„ ë§¨ ìœ„ë¡œ ì˜¬ë¦¬ê¸°
+        m_vec.pop_back();//headì‚­ì œ
 
 
-        for (int i = 1; i * 2 <= m_vec.size() - 1;)//headºÎÅÍ ÀÚ½ÄÀ¸·Î ³»·Á°¡¸é¼­ È®ÀÎ
+        for (int i = 1; i * 2 <= m_vec.size() - 1;)//headë¶€í„° ìì‹ìœ¼ë¡œ ë‚´ë ¤ê°€ë©´ì„œ í™•ì¸
         {
-            if (i * 2 + 1 <= m_vec.size() - 1) {//¿À¸¥ÀÚ½ÄÀÌ ÀÖÀ» ¶§
-                if (m_vec[i].first < m_vec[i * 2].first && m_vec[i].first < m_vec[i * 2 + 1].first) { break; }//head°¡ Á¦ÀÏ ÀÛÀ» ‹š
+            if (i * 2 + 1 <= m_vec.size() - 1) {//ì˜¤ë¥¸ìì‹ì´ ìˆì„ ë•Œ
+                if (m_vec[i].first < m_vec[i * 2].first && m_vec[i].first < m_vec[i * 2 + 1].first) { break; }//headê°€ ì œì¼ ì‘ì„ Â‹Âš
 
-                 //headº¸´Ù child°¡ ´õ ÀÛÀ» ¶§
+                 //headë³´ë‹¤ childê°€ ë” ì‘ì„ ë•Œ
                 else if (m_vec[i * 2].first < m_vec[i * 2 + 1].first) {//left<right
                     swap(m_vec[i], m_vec[i * 2]);
                     i = i * 2;
@@ -60,7 +60,7 @@ public:
                     i = i * 2 + 1;
                 }
             }
-            else {//¿ŞÂÊ¸¸ È®ÀÎ(¿À¸¥ ÀÚ½ÄÀÌ ¾øÀ» ‹š)
+            else {//ì™¼ìª½ë§Œ í™•ì¸(ì˜¤ë¥¸ ìì‹ì´ ì—†ì„ Â‹Âš)
                 if (m_vec[i].first < m_vec[i * 2].first) { break; }
                 else {
                     swap(m_vec[i], m_vec[i * 2]);
@@ -71,13 +71,13 @@ public:
     }
 
 
-    /// <summary>
-    /// get the minimum element
-    /// </summary>
-    ///
-    /// <returns>
-    /// the minimum element
-    /// </returns>
+    // <summary>
+    // get the minimum element
+    // </summary>
+    //
+    // <returns>
+    // the minimum element
+    // </returns>
     std::pair<TKey, TValue> Top() {
         if (m_vec.size() == 1) {
             std::pair<TKey, TValue> re = std::make_pair(NULL, NULL);
@@ -87,54 +87,54 @@ public:
     }
 
 
-    /// <summary>
-    /// get the key-value pair which the value is the same as the target
-    /// </summary>
-    ///
-    /// <returns>
-    /// the key-value pair which the value is the same as the target
-    /// </returns>
+    // <summary>
+    // get the key-value pair which the value is the same as the target
+    // </summary>
+    //
+    // <returns>
+    // the key-value pair which the value is the same as the target
+    // </returns>
     std::pair<TKey, TValue> Get(TValue target) {
-        for (int i = m_vec.size() - 1; i >= 1; i--) { //µÚ¿¡¼­ ºÎÅÍ Ã£´Â´Ù.
+        for (int i = m_vec.size() - 1; i >= 1; i--) { //ë’¤ì—ì„œ ë¶€í„° ì°¾ëŠ”ë‹¤.
             if (m_vec[i].second == target) { return m_vec[i]; }
         }
         std::pair<TKey, TValue> re = std::make_pair(NULL, NULL);
-        return re;//¾øÀ¸¸é NULL¹İÈ¯
+        return re;//ì—†ìœ¼ë©´ NULLë°˜í™˜
     }
 
 
-    /// <summary>
-    /// check whether this heap is empty or not
-    /// </summary>
-    ///
-    /// <returns>
-    /// true if this heap is empty
-    /// </returns>
+    // <summary>
+    // check whether this heap is empty or not
+    // </summary>
+    //
+    // <returns>
+    // true if this heap is empty
+    // </returns>
     bool IsEmpty() {
         if (m_vec.size() == 1) { return 1; }
         else { return 0; }
     }
 
 
-    /// <summary>
-    /// change the key of the node which the value is the target.<para/>
-    /// In general, the newKey should be smaller than the old key.<para/>
-    /// </summary>
-    ///
-    /// <parma name="target">
-    /// the target to change the key
-    /// </param>
-    ///
-    /// <param name="newKey">
-    /// new key for the target
-    /// </param>
+    // <summary>
+    // change the key of the node which the value is the target.<para/>
+    // In general, the newKey should be smaller than the old key.<para/>
+    // </summary>
+    //
+    // <parma name="target">
+    // the target to change the key
+    // </param>
+    //
+    // <param name="newKey">
+    // new key for the target
+    // </param>
     void DecKey(TValue target, TKey newKey) {
-        for (int i = m_vec.size() - 1; i >= 1; i--) { //µÚ¿¡¼­ ºÎÅÍ Ã£´Â´Ù.
+        for (int i = m_vec.size() - 1; i >= 1; i--) { //ë’¤ì—ì„œ ë¶€í„° ì°¾ëŠ”ë‹¤.
             //TValue v = m_vec[i].second;
             if (m_vec[i].second == target) {
                 //TKey* k= &m_vec[i].first;
                 if (m_vec[i].first > newKey) {
-                    m_vec[i].first = newKey; //key¸¦ ¹Ù²Û´Ù.
+                    m_vec[i].first = newKey; //keyë¥¼ ë°”ê¾¼ë‹¤.
                     for (int j = i; j > 1; j = j / 2) {
                         if (m_vec[j] < m_vec[j / 2]) { swap(m_vec[j], m_vec[j / 2]); }
                     }
@@ -145,10 +145,10 @@ public:
         return;
     }
     private:
-        /// <summary>
-        /// heap-sort, heapify.<para/>
-        /// this function can be called recursively
-        /// </summary>
+        // <summary>
+        // heap-sort, heapify.<para/>
+        // this function can be called recursively
+        // </summary>
         void Heapify(int index) {
             int c = 2 * index;
             if (c < m_vec.size()) {
