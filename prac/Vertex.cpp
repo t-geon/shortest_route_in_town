@@ -3,9 +3,10 @@
 Vertex::Vertex() {
 	m_key = -1;
 	m_size = 0;
-	m_pEHead = NULL; //µ¿ÀûÇÒ´ç ÇØ¾ßÇÏ³ª?
+	m_pEHead = NULL;
 	m_pNext = NULL;
 }
+
 Vertex::Vertex(int key) {
 	m_key = key;
 	m_size = 0;
@@ -18,58 +19,56 @@ Vertex::~Vertex() {
 	delete m_pEHead;
 }
 
-
-//³»°¡ Ãß°¡ÇÑ°Å
 void Vertex::SetName(string name) { Name = name; }
 void Vertex::Setstore(string s) { store = s; }
 
 
 Edge* Vertex::FindEdge(int endvertex) {
-	Edge* cure = m_pEHead;//head vertex¿¡¼­ ½ÃÀÛ
+	Edge* cure = m_pEHead;//head vertexì—ì„œ ì‹œìž‘
 
-	while (cure != NULL) {//vertex Ãâ·Â
+	while (cure != NULL) {//vertex ì¶œë ¥
 		if (cure->GetKey() == endvertex) { return cure; }
-		cure = cure->GetNext();//curv ÀÌµ¿
+		cure = cure->GetNext();//curv ì´ë™
 	}
 	return NULL;
 }
 
 Edge* Vertex::FindprevEdge(int endvertex) {
-	Edge* cure = m_pEHead;//head vertex¿¡¼­ ½ÃÀÛ
-	Edge* prev = NULL;//head vertex¿¡¼­ ½ÃÀÛ
-	while (cure != NULL) {//vertex Ãâ·Â
+	Edge* cure = m_pEHead;//head vertexì—ì„œ ì‹œìž‘
+	Edge* prev = NULL;//head vertexì—ì„œ ì‹œìž‘
+	while (cure != NULL) {//vertex ì¶œë ¥
 		if (cure->GetKey() == endvertex) { return prev; }
 		prev = cure;
-		cure = cure->GetNext();//curv ÀÌµ¿
+		cure = cure->GetNext();//curv ì´ë™
 	}
 	return NULL;
 }
 
 
 
-/// set the next pointer of this vertex
+// set the next pointer of this vertex
 void Vertex::SetNext(Vertex* pNext) {m_pNext = pNext;}
 
-/// get the key of this vertex
+// get the key of this vertex
 int Vertex::GetKey() const {return m_key;}
 
-/// get the next pointer of this vertex
+// get the next pointer of this vertex
 Vertex* Vertex::GetNext() const {return m_pNext;}
 
-/// get the number of the edges
+// get the number of the edges
 int Vertex::Size() const { return m_size; }
 
-/// add edge with edgeNum at the end of the linked list for the edges
-/// the key of the vertex for the edge
-/// the weight of the edge
+// add edge with edgeNum at the end of the linked list for the edges
+// the key of the vertex for the edge
+// the weight of the edge
 void Vertex::AddEdge(int edgeKey, int weight) {
 	Edge* cur = m_pEHead;
-	Edge* ine=new Edge(edgeKey, weight);//ÀÌ·¸°Ô ÇØµµ ÃÊ±âÈ­ µÇ³ª? ine´Â »ðÀÔÇÒ edge
+	Edge* ine=new Edge(edgeKey, weight);//ineëŠ” ì‚½ìž…í•  edge
 
-	if (cur == NULL) { m_pEHead = ine; }//Ã¹ edgeÀÌ¸é m_pEHead¿¡ ÀúÀå
+	if (cur == NULL) { m_pEHead = ine; }//ì²« edgeì´ë©´ m_pEHeadì— ì €ìž¥
 
 	else {
-		if (cur->GetKey() > edgeKey) {//»ðÀÔÇÏ´Â°Ô °¡Àå ÀÛÀº keyÀÌ¸é
+		if (cur->GetKey() > edgeKey) {//ì‚½ìž…í•˜ëŠ”ê²Œ ê°€ìž¥ ìž‘ì€ keyì´ë©´
 			ine->SetNext(cur);
 			m_pEHead = ine;
 			return;
@@ -90,11 +89,11 @@ void Vertex::AddEdge(int edgeKey, int weight) {
 }
 
 
-/// get the head pointer of the edge
+// get the head pointer of the edge
 Edge* Vertex::GetHeadOfEdge() const {return m_pEHead;}
 
 
-/// memory free for edges
+// memory free for edges
 void Vertex::Clear() {
 	Edge* c = m_pEHead;
 	Edge* s = c->GetNext();
