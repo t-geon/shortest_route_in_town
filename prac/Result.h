@@ -1,6 +1,7 @@
 #ifndef RESULT_H
 #define RESULT_H
 
+// number of error 
 enum Result
 {
     Success = 0,
@@ -19,7 +20,6 @@ enum Result
     NegativeCycleDetected,
 
     NonDefinedCommand = 300,
-    
 
 };
 
