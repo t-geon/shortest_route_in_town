@@ -67,37 +67,37 @@ public:
     // </returns>
     Vertex* GetNext() const;
 
-    /// <summary>
-    /// get the number of the edges
-    /// </summary>
-    ///
-    /// <returns>
-    /// the number of the edges
+    // <summary>
+    // get the number of the edges
+    // </summary>
+    //
+    // <returns>
+    // the number of the edges
     /// </returns>
     int Size() const;
 
-    /// <summary>
-    /// add edge with edgeNum at the end of the linked list for the edges
-    /// </summary>
-    ///
-    /// <param name="edgeKey">
-    /// the key of the vertex for the edge
-    /// </param>
-    /// <param name="weight">
-    /// the weight of the edge
-    /// </param>
+    // <summary>
+    // add edge with edgeNum at the end of the linked list for the edges
+    // </summary>
+    //
+    // <param name="edgeKey">
+    // the key of the vertex for the edge
+    // </param>
+    // <param name="weight">
+    // the weight of the edge
+    // </param>
     void AddEdge(int edgeKey, int weight);
-    /// <summary>
-    /// get the head pointer of the edge
-    /// </summary>
+    // <summary>
+    // get the head pointer of the edge
+    // </summary>
     ///
-    /// <returns>
-    /// the ehad pointer of the edge
-    /// </returns>
+    // <returns>
+    / the ehad pointer of the edge
+    // </returns>
     Edge* GetHeadOfEdge() const;
-    /// <summary>
-    /// memory free for edges
-    /// </summary>
+    // <summary>
+    // memory free for edges
+    // </summary>
     void Clear();
 };
 
