@@ -1,5 +1,5 @@
 //#pragma once
-#include<string>//stoi사용하기 위해
+#include<string>
 using namespace std;
 
 #ifndef VERTEX_H
@@ -28,8 +28,6 @@ public:
     Vertex(int key);
     ~Vertex();
 
-
-    //내가 추가한거
     string Name;
     string store;
     string ns;
@@ -48,25 +46,25 @@ public:
     void sethead(Edge* head) { m_pEHead = head; }
 
 
-    /// <summary>
-    /// set the next pointer of this vertex
-    /// </summary>
+    // <summary>
+    // set the next pointer of this vertex
+    // </summary>
     void SetNext(Vertex* pNext);
-    /// <summary>
-    /// get the key of this vertex
-    /// </summary>
-    ///
-    /// <returns>
-    /// the key of this vertex
-    /// </returns>
+    // <summary>
+    // get the key of this vertex
+    // </summary>
+    //
+    // <returns>
+    // the key of this vertex
+    // </returns>
     int GetKey() const;
-    /// <summary>
-    /// get the next pointer of this vertex
-    /// </summary>
-    ///
-    /// <returns>
-    /// the next pointer of this vertex
-    /// </returns>
+    // <summary>
+    // get the next pointer of this vertex
+    // </summary>
+    //
+    // <returns>
+    // the next pointer of this vertex
+    // </returns>
     Vertex* GetNext() const;
 
     /// <summary>
