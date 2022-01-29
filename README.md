@@ -215,10 +215,10 @@ example) 3 4 1 5 2를 정렬한다
 
 4. Heap sort
 
-Heap sort는 min heap으로 구현했다.
-push를 이용해 heap에 값을 넣는다.
-push를 할 때는 맨 끝에 삽입한 후 자신의 부모(자신 index/2)와 비교해 작으면 부모와 위치를 바꾼다.
-root까지 올라갈 수 있다.
+Heap sort는 min heap으로 구현했다.    
+push를 이용해 heap에 값을 넣는다.    
+push를 할 때는 맨 끝에 삽입한 후 자신의 부모(자신 index/2)와 비교해 작으면 부모와 위치를 바꾼다.    
+root까지 올라갈 수 있다.    
 
 example) 5 3 7 1 을 정렬한다     
 - 5는 root가 된다.
