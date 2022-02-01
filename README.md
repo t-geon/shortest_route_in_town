@@ -1,12 +1,12 @@
 # shortest_route_in_town
 
-A graph is formed using the distane and name information of the stores.     
-Shortest path algorithm BFS, DIJKSTRA using set, DIJKSTRA using min heap, BELLMANFORD, FLOYD are used.       
-After finding the shortest path, the path is sorted using a sorting algorithm.
-Use quick sort, insert sort, merge sort, heap sort, bubble sort, and selection sort.
-Finally, by connecting the signage of each store you hear from each route, the string is compressed according to the official compression rule of the Principality of Rabin-Karp.
- -> 문자열을 비교하는 경우에는 반드시 라빈카프 알고리즘을 사용한다.    
- -> 즉 압축을 할 때와 update를 할 때 라빈카프 알고리즘이 사용된다.     
+A graph is formed using the distane and name information of the stores.    
+Shortest path algorithm BFS, DIJKSTRA using set, DIJKSTRA using min heap, BELLMANFORD, FLOYD are used.    
+After finding the shortest path, the path is sorted using a sorting algorithm.    
+Use quick sort, insert sort, merge sort, heap sort, bubble sort, and selection sort.    
+Finally, by connecting the signage of each store you hear from each route, the string is compressed according to the official compression rule of the Principality of Rabin-Karp.    
+ -> When comparing strings, the Ravincalf algorithm must be used.    
+ -> The Rabin-Karp algorithm is used for compression and update.    
 
 # 최단경로 알고리즘
 1. BFS
