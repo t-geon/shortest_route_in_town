@@ -8,10 +8,9 @@ Finally, by connecting the signage of each store you hear from each route, the s
  -> When comparing strings, the Ravincalf algorithm must be used.    
  -> The Rabin-Karp algorithm is used for compression and update.    
 
-# 최단경로 알고리즘
+# shortest path algorithm
 1. BFS
-
-BFS는 너비 우선 탐색으로 그래프 탐색 방법이다.    
+BFS is a graph search method with breadth-first search.   
 시작 정점으로부터 가까운 정점을 먼저 방문하고 멀리 떨어진 정점은 나중에 방문하는 순회 방법으로 queue를 사용한다.    
 - 시작 정점에서 인접한 정점들을 모두 queue에 넣는다.    
 - queue의 맨 앞 요소로 이동한 뒤 queue에서 pop한다.    
