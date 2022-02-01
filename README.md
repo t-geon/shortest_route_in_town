@@ -9,9 +9,10 @@ Finally, by connecting the signage of each store you hear from each route, the s
  -> The Rabin-Karp algorithm is used for compression and update.    
 
 # shortest path algorithm
-1. BFS
-BFS is a graph search method with breadth-first search.   
-시작 정점으로부터 가까운 정점을 먼저 방문하고 멀리 떨어진 정점은 나중에 방문하는 순회 방법으로 queue를 사용한다.    
+
+1. BFS    
+BFS is a graph search method with breadth-first search.    
+A queue is used as a traversal method that visits the closest vertices in order from the starting vertex.    
 - 시작 정점에서 인접한 정점들을 모두 queue에 넣는다.    
 - queue의 맨 앞 요소로 이동한 뒤 queue에서 pop한다.    
 - 이동한 vertex에서 인접한 vertex를 queue에 전부 넣는다.    
