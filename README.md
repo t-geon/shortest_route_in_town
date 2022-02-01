@@ -2,9 +2,9 @@
 
 A graph is formed using the distane and name information of the stores.     
 Shortest path algorithm BFS, DIJKSTRA using set, DIJKSTRA using min heap, BELLMANFORD, FLOYD are used.       
-최단경로를 구한 후에 정렬 알고리즘을 사용해 경로를 정렬한다.    
-정렬 알고리즘은 quick, insert, merge, heap, bubble, selection sort를 사용한다.     
-마지막으로 각 경로에서 들리는 가게마다 간판명을 연결해 라빈카프 공국 공식 압축 법칙에 따라 문자열을 압축한다.    
+After finding the shortest path, the path is sorted using a sorting algorithm.
+Use quick sort, insert sort, merge sort, heap sort, bubble sort, and selection sort.
+Finally, by connecting the signage of each store you hear from each route, the string is compressed according to the official compression rule of the Principality of Rabin-Karp.
  -> 문자열을 비교하는 경우에는 반드시 라빈카프 알고리즘을 사용한다.    
  -> 즉 압축을 할 때와 update를 할 때 라빈카프 알고리즘이 사용된다.     
 
