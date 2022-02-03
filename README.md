@@ -23,15 +23,15 @@ When you arrive at the destination vertex, you can find the route by searching b
 
 ![image](https://user-images.githubusercontent.com/88877637/149550057-abe72134-3bc4-47d8-a8fd-78fc37763afb.png)
 
-example) 위와 같은 그래프가 있을 때 1에서 5로 가는 최단 경로를 구하는 방법은 다음과 같다.    
-- 1을 queue에 넣고 뺀 뒤 기준 정점을 1으로 설정하고 1의 인접한 2, 3, 4 정점을 순서대로 queue에 넣는다.    
-- 기준 정점은 queue의 front인 2가 된다. 2를 queue에서 뺀다.     
-- 2의 인접 정점은 없기 때문에 queue에 넣지 않는다.    
-- 기준 정점은 3된다. 3을 queue에서 뺀다.    
-- 3에서 인접한 정점은 5이기 때문에 도착지점으로 탐색을 마친다.    
-이때 총 이동경로는 반대로 접근해서 찾는다.    
-3->5 가 마지막이므로 거꾸로 올라가면서 3에 도착하는 edge를 찾아야한다.    
-1->3이 해당 edge가 되며 도착지가 출발지점과 같기 때문에 경로는 1 3 5가 된다.    
+example) Given the graph above, let's find the shortest path from 1 to 5   
+- After putting 1 into the queue and subtracting it, the reference vertex is set to 1, and the adjacent 2, 3, 4 vertices of 1 are put into the queue in order.
+- The reference vertex becomes 2, which is the front of the queue. Subtract 2 from the queue.    
+- Since there are no adjacent vertices of 2, we don't put them in the queue.
+- The reference vertex becomes 3. 3 is subtracted from the queue.    
+- Since the adjacent vertex in 3 is 5, the search ends with the destination.
+At this time, the total movement path is found by approaching in the opposite direction.
+Since 3->5 is the last, we need to find the edge that reaches 3 while going backwards.   
+1->3 is the corresponding edge, and the destination is the same as the starting point, so the path is 1 3 5.  
 
 ---------------------------------------------------------------------
 
