@@ -16,22 +16,22 @@ A queue is used as a traversal method that visits the closest vertices in order 
 - At the starting vertex, adjacent vertices are put into the queue.     
 - Moves to the front element of the queue and pops it from the queue.    
 - All vertices adjacent to the moved vertex are put into the queue.
-- Repeat the above operation until the queue is empty
-Originally, it had to repeat moving from the value in the queue to the smallest value.
-However, since we implemented it without considering the cost, we store the starting vertex and the destination vertex when moving.
-When you arrive at the destination vertex, you can find the route by searching backwards based on the stored information.
+- Repeat the above operation until the queue is empty    
+Originally, it had to repeat moving from the value in the queue to the smallest value.    
+However, since we implemented it without considering the cost, we store the starting vertex and the destination vertex when moving.    
+When you arrive at the destination vertex, you can find the route by searching backwards based on the stored information.    
 
 ![image](https://user-images.githubusercontent.com/88877637/149550057-abe72134-3bc4-47d8-a8fd-78fc37763afb.png)
 
 example) Given the graph above, let's find the shortest path from 1 to 5   
-- After putting 1 into the queue and subtracting it, the reference vertex is set to 1, and the adjacent 2, 3, 4 vertices of 1 are put into the queue in order.
+- After putting 1 into the queue and subtracting it, the reference vertex is set to 1, and the adjacent 2, 3, 4 vertices of 1 are put into the queue in order.    
 - The reference vertex becomes 2, which is the front of the queue. Subtract 2 from the queue.    
 - Since there are no adjacent vertices of 2, we don't put them in the queue.
 - The reference vertex becomes 3. 3 is subtracted from the queue.    
-- Since the adjacent vertex in 3 is 5, the search ends with the destination.
-At this time, the total movement path is found by approaching in the opposite direction.
-Since 3->5 is the last, we need to find the edge that reaches 3 while going backwards.   
-1->3 is the corresponding edge, and the destination is the same as the starting point, so the path is 1 3 5.  
+- Since the adjacent vertex in 3 is 5, the search ends with the destination.    
+At this time, the total movement path is found by approaching in the opposite direction.    
+Since 3->5 is the last, we need to find the edge that reaches 3 while going backwards.    
+1->3 is the corresponding edge, and the destination is the same as the starting point, so the path is 1 3 5.    
 
 ---------------------------------------------------------------------
 
