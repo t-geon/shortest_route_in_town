@@ -13,13 +13,13 @@ Finally, by connecting the signage of each store you hear from each route, the s
 1. BFS    
 BFS is a graph search method with breadth-first search.    
 A queue is used as a traversal method that visits the closest vertices in order from the starting vertex.    
-- 시작 정점에서 인접한 정점들을 모두 queue에 넣는다.    
-- queue의 맨 앞 요소로 이동한 뒤 queue에서 pop한다.    
-- 이동한 vertex에서 인접한 vertex를 queue에 전부 넣는다.    
-- 위와 같은 동작을 queue가 빌 때까지 반복한다.    
-최단경로를 찾는 용도로 사용되기 때문에 원래는 queue에 있는 값에서 가장 작은 값으로 이동하는 것을 반복해야 한다.    
-하지만 비용은 생각하지 않고 구현했기 때문에 이동시에 시작 정점과 도착 정점을 저장한다.    
-도착 정점에 도착했을 때 저장해둔 정보를 기준으로 거꾸로 탐색해서 경로를 찾을 수 있다.
+- At the starting vertex, adjacent vertices are put into the queue.     
+- Moves to the front element of the queue and pops it from the queue.
+- All vertices adjacent to the moved vertex are put into the queue.
+- Repeat the above operation until the queue is empty
+Originally, it had to repeat moving from the value in the queue to the smallest value.
+However, since we implemented it without considering the cost, we store the starting vertex and the destination vertex when moving.
+When you arrive at the destination vertex, you can find the route by searching backwards based on the stored information.
 
 ![image](https://user-images.githubusercontent.com/88877637/149550057-abe72134-3bc4-47d8-a8fd-78fc37763afb.png)
 
