@@ -61,21 +61,21 @@ void Graph::AddEdge(int startVertexKey, int endVertexKey, int weight) {
     else { cur->AddEdge(endVertexKey, weight); }
 }
 
-/// get the vertex which the key is vertexNum
+// get the vertex which the key is vertexNum
 Vertex* Graph::FindVertex(int key) {
     Vertex* cur = m_pVHead;
     if (cur == NULL) { return NULL; }//empty graph
 
     while (cur->GetKey() < key && cur->GetNext() != NULL) { cur = cur->GetNext(); }
 
-    if (cur->GetKey()== key) { return cur;}//해당 vertex에 반환
-    else { return NULL; }//찾는 vertex없음
+    if (cur->GetKey()== key) { return cur;}
+    else { return NULL; }//No vertices to find
 }
 
-/// get the number of the vertics
+// get the number of the vertics
 int Graph::Size() const {return m_vSize;}
 
-/// memory free for the vertics
+// memory free for the vertics
 void Graph::Clear() {
     Vertex* c=m_pVHead;
     Vertex* s = NULL;
@@ -86,7 +86,7 @@ void Graph::Clear() {
     }
 }
 
-/// print out the graph as matrix form
+// print out the graph as matrix form
 void Graph::Print(std::ofstream& fout) {
     Vertex* curv = m_pVHead;//head vertex에서 시작
     
