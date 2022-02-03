@@ -14,7 +14,7 @@ Finally, by connecting the signage of each store you hear from each route, the s
 BFS is a graph search method with breadth-first search.    
 A queue is used as a traversal method that visits the closest vertices in order from the starting vertex.    
 - At the starting vertex, adjacent vertices are put into the queue.     
-- Moves to the front element of the queue and pops it from the queue.
+- Moves to the front element of the queue and pops it from the queue.    
 - All vertices adjacent to the moved vertex are put into the queue.
 - Repeat the above operation until the queue is empty
 Originally, it had to repeat moving from the value in the queue to the smallest value.
