@@ -103,8 +103,8 @@ void Graph::Print(std::ofstream& fout) {
 }
 
 // check whether the graph has negative edge or not.
-bool Graph::IsNegativeEdge() {//모든 edge확인
-    Vertex* curv = m_pVHead;//head vertex에서 시작
+bool Graph::IsNegativeEdge() {
+    Vertex* curv = m_pVHead;
 
     while (curv != NULL) {
         Edge* cure = curv->GetHeadOfEdge();
