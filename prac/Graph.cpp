@@ -37,24 +37,24 @@ void Graph::AddVertex(int vertexKey) {
     Vertex* cur = m_pVHead;
     Vertex* inv = new Vertex(vertexKey);
     
-    if (cur == NULL) { m_pVHead = inv;}//그래프가 비어있으면 head에 넣기
+    if (cur == NULL) { m_pVHead = inv;}//If the graph is empty, put it in the head
     else {
-        while (cur->GetKey() < vertexKey && cur->GetNext() != NULL) {//삽입하려는 key값이 cut의 key값 크고 cur->next가 NULL이 아니면
+        while (cur->GetKey() < vertexKey && cur->GetNext() != NULL) {//If the key value to be inserted is larger than the key value of cut and cur->next is not NULL,
             if(cur->GetNext()->GetKey()> vertexKey){
-                inv->SetNext(cur->GetNext());//cur의 next가 있다면 inv의 next에 연결
-                cur->SetNext(inv);//cur의 next에 ine 넣기
-                m_vSize += 1;//size 1 증가
+                inv->SetNext(cur->GetNext());//If cur's next exists, it is connected to inv's next.
+                cur->SetNext(inv);//Put ine in cur's next
+                m_vSize += 1;
                 return;
             }
-            cur = cur->GetNext();//cur을 next로 이동
+            cur = cur->GetNext();//move cur to next
         }
-        cur->SetNext(inv);//cur의 next에 ine 넣기
+        cur->SetNext(inv);//Put ine in cur's next
     }
     m_vSize += 1;//size increase
     return;
 }
 
-/// add edge from the vertex which the number is startVertexKey to the vertex which the number is endVertexKey
+// add edge from the vertex which the number is startVertexKey to the vertex which the number is endVertexKey
 void Graph::AddEdge(int startVertexKey, int endVertexKey, int weight) {
     Vertex* cur = FindVertex(startVertexKey);
     if (cur == NULL) { cout << "no start vertex" << endl; return; }
