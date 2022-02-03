@@ -88,21 +88,21 @@ void Graph::Clear() {
 
 // print out the graph as matrix form
 void Graph::Print(std::ofstream& fout) {
-    Vertex* curv = m_pVHead;//head vertex에서 시작
+    Vertex* curv = m_pVHead;//start at head vertex
     
-    while (curv != NULL) {//vertex 출력
-        for (int i = 0; i < m_vSize; i++) {//모든 vertex 출력
-            Edge* cure = curv->FindEdge(i);//도착 vertex가 i인 edge찾기
-            if (cure == NULL) { fout << "0 "; cout << "0 "; }//없으면 0출력
-            else { fout << cure->GetWeight() << " "; cout << cure->GetWeight() << " "; }//있으면 weight 출력
+    while (curv != NULL) {
+        for (int i = 0; i < m_vSize; i++) {
+            Edge* cure = curv->FindEdge(i);//Find the edge whose arrival vertex is i
+            if (cure == NULL) { fout << "0 "; cout << "0 "; }
+            else { fout << cure->GetWeight() << " "; cout << cure->GetWeight() << " "; }
         }
         fout << endl;
         cout << endl;
-        curv = curv->GetNext();//curv 이동
+        curv = curv->GetNext();
     }
 }
 
-/// check whether the graph has negative edge or not.
+// check whether the graph has negative edge or not.
 bool Graph::IsNegativeEdge() {//모든 edge확인
     Vertex* curv = m_pVHead;//head vertex에서 시작
 
