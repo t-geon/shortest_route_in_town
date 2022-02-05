@@ -38,22 +38,24 @@ Since 3->5 is the last, we need to find the edge that reaches 3 while going back
 2. DIJKSTRA (set)
 
 Dijkstra algorithm is one of the most used algorithms for the shortest path search using dynamic programming.    
-In Dijkstra algorithm, one shortest distance can consist of several shortest distances.   
-Therefore, it has the characteristic of using the shortest distance information obtained before as it is.
+In Dijkstra algorithm, one shortest distance can consist of several shortest distances.    
+Therefore, it has the characteristic of using the shortest distance information obtained before as it is.    
  
    ![image](https://user-images.githubusercontent.com/88877637/149550039-1fea5af6-562b-4a61-8347-4959468fc2e1.png)
    
 example) Let's find the shortest distance from 1 to 2 in the graph above.    
-- 길이를 저장하는 배열에 IN_FINITY를 모두 초기화 시킨다    
-- 비용을 first로 하고 도착지를 second로 하는 pair를 set에 넣고 시작한다.    
--> 즉 출발지인 1을 넣을 때는 비용은 0이고 도착지는 1이다.    
-- 총 set이 빌 때까지 반복하며 중간에 도착지가 나오면 반복을 종료한다.    
-- 첫번째 요소를 set에서 빼면서 1에 인접한 vertex로 가는 비용을 계산한다.    
-- 이미 저장되어 있는 비용과 비교한 뒤, 해당 경로를 거쳤을 때 더 작은 비용이 드는 경우에 비용과 vertex를 pair로 만들어 set에 넣어준다.    
--> 이때 prev_vertex에 어디에서 이동한 것인지 저장한다. 즉 1이 저장된다.    
-- set은 자동적으로 key값에 따라 정렬되기 때문에 2,3,4로 가는 비용 중 가장 작은 4로 이동한다.    
-- 4로 이동하는 pair가 set에서 지워지고 4에서 6으로 이동하는 pair가 set에 들어간다.    
-- 1에서 2로 이동하는 경로가 최소가 된다.    
+- Initialize the length-storing array to IN_FINITY    
+- Start by putting a pair with first = cost and second = destination into the set.     
+-> When you put in 1, which is the source, cost = 0 and destination = 1.    
+- It repeats until set is empty, and the iteration ends when a destination is reached in the middle.      
+- Calculate the cost of going to the vertex adjacent to 1 by subtracting the first element from the set.      
+- Compare with stored costs.    
+-> If the cost is small when passing through the path, the cost and vertex are paired and put into the set.      
+-> It stores where it was moved in prev_vertex. That is, 1 is stored.
+- The set is sorted according to the key value.    
+-> It moves to 4, which is the smallest of the costs going to 2, 3, and 4.    
+- The pair moving to 4 is removed from the set, and the pair moving from 4 to 6 is put into the set.    
+- The path from 1 to 2 is minimal.       
 - set에서 2로 이동하는 pair를 뺀다. 나온 값이 도착지점과 같기 때문에 끝난다.    
 - 하나의 반복문이 끝나고 나면 prev_vertex를 확인하는 반복문을 통해 각 정점 별 최단 경로와 도착지의 최단경로를 역추적해 경로를 출력한다. 즉 1 2로 출력된다.    
 
