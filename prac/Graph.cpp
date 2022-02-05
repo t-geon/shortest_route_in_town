@@ -175,42 +175,41 @@ std::vector<int> Graph::FindPathBfs(int startVertexKey, int endVertexKey) {
     return res;
 }
 
-/// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
+// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
 std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey) {
-    int* length=new int[m_vSize];//비용 저장
-    int* prev_vertex = new int[m_vSize];//최단 경로 저장
+    int* length=new int[m_vSize]; //save cost
+    int* prev_vertex = new int[m_vSize];//save shortest path
     int endnum = 0;
 
-    fill(length, length + m_vSize, IN_FINITY);//length전부 IN_FINITY로 저장
+    fill(length, length + m_vSize, IN_FINITY);//Store all length as IN_FINITY
 
-    set<pair<int,int>> s;//first는 비용, second는 도착지
-    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//시작 vertex에 인접해있는 vertex중 첫번째 edge, cure에 저장
+    set<pair<int,int>> s;//First is the cost, second is the destination
+    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();
 
-
-    //출발지 넣어주기
+    //enter the starting point
     s.insert(make_pair(0, startVertexKey));
-    length[startVertexKey] = 0;//시작점 거리
+    length[startVertexKey] = 0;
 
     while (!s.empty()) {
-        int n = s.begin()->second;//최소 비용인 경로를 가져온다.
+        int n = s.begin()->second;//Get the path with the least cost.
         s.erase(s.begin());
 
-        if (n == endVertexKey) { endnum = 1; break; }//도착지까지 최단경로가 나온면 끝
+        if (n == endVertexKey) { endnum = 1; break; }//If the shortest route to the destination is found, it is over.
 
-        cure = FindVertex(n)->GetHeadOfEdge();//cure에 이동한 vertex의 첫번째 edge 저장      
+        cure = FindVertex(n)->GetHeadOfEdge();//Save the first edge of the moved vertex to cure    
         
 
         while (cure != NULL) {
             int next = cure->GetKey();
             int weight = cure->GetWeight();
 
-            if (length[next] > length[n] + weight) {//원래 저장된 거리보다 n을 거쳐갈 때 더 짧으면
-                if (length[next] != IN_FINITY) { s.erase(make_pair(length[next], next)); }// 이미 set에 있는 경로에서 더 짧은 경로가 나왔을 때 원래 set 지우기
+            if (length[next] > length[n] + weight) {//If it is shorter when traversing n than the originally stored distance
+                if (length[next] != IN_FINITY) { s.erase(make_pair(length[next], next)); }
                 length[next] = length[n] + weight;
                 prev_vertex[next] = n;
                 s.insert(make_pair(length[next], next));
             }
-            cure = cure->GetNext();//다음 경로
+            cure = cure->GetNext();//next path
         }
     }
 
