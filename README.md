@@ -56,8 +56,9 @@ example) Let's find the shortest distance from 1 to 2 in the graph above.
 -> It moves to 4, which is the smallest of the costs going to 2, 3, and 4.    
 - The pair moving to 4 is removed from the set, and the pair moving from 4 to 6 is put into the set.    
 - The path from 1 to 2 is minimal.       
-- set에서 2로 이동하는 pair를 뺀다. 나온 값이 도착지점과 같기 때문에 끝난다.    
-- 하나의 반복문이 끝나고 나면 prev_vertex를 확인하는 반복문을 통해 각 정점 별 최단 경로와 도착지의 최단경로를 역추적해 경로를 출력한다. 즉 1 2로 출력된다.    
+- Subtract the pair moving by 2 from the set. It ends because the output value is the same as the destination point.
+- When one loop ends, a loop that checks prev_vertex starts.    
+-> The shortest path for each vertex and the shortest path to the destination are traced back and the path is output. That is, 1 -> 2 is output.     
 
 ---------------------------------------------------------------------
 
