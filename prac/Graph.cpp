@@ -118,14 +118,14 @@ bool Graph::IsNegativeEdge() {
     return 0;
 }
 
-/// find the path from startVertexKey to endVertexKey with BFS (stack)
+// find the path from startVertexKey to endVertexKey with BFS (stack)
 std::vector<int> Graph::FindPathBfs(int startVertexKey, int endVertexKey) {
     Queue<int> q;
     int endnum = 0,length=0;
-    vector<int> v;//도착지 저장
-    vector<int> v1;//출발지 저장
-    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//시작 vertex에 인접해있는 vertex중 첫번째 edge, cure에 저장
-    q.push(startVertexKey);//queue에 첫번째 vertex넣기
+    vector<int> v;//save destination
+    vector<int> v1;//save origin
+    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//Store the first edge among vertices adjacent to the start vertex in cure
+    q.push(startVertexKey);//Put the first vertex in the queue
     v.push_back(startVertexKey);
     v1.push_back(startVertexKey);
     while (!q.empty()) {
@@ -134,35 +134,35 @@ std::vector<int> Graph::FindPathBfs(int startVertexKey, int endVertexKey) {
         q.pop();
         //cout << qn << endl;
         while (cure!= NULL&&endnum==0) {
-            vector<int>::iterator it = find(v.begin(), v.end(), cure->GetKey());//it에 qn의 위치저장, 없으면 end위치
-            if(it==v.end()){//vector에 없는 값이면
-                q.push(cure->GetKey());//qn vertex에 인접한 vertex들 queue에 넣기
-                //length = length + cure->GetWeight();//비용을 더해준다.
+            vector<int>::iterator it = find(v.begin(), v.end(), cure->GetKey());//Store the position of qn in it, if there is no end position
+            if(it==v.end()){
+                q.push(cure->GetKey());//Putting vertices adjacent to qn vertices into the queue
+                //length = length + cure->GetWeight();
                 v1.push_back(qn);
-                v.push_back(cure->GetKey());//방문 표시
+                v.push_back(cure->GetKey());//visit sign
                 if (cure->GetKey() == endVertexKey) { endnum = 1; break; }
             }
             cure = cure->GetNext();
         }
     }
 
-    if (endnum != 1) { vector<int>em; return em; }//최단 경로가 없으면 빈 벡터 리턴
+    if (endnum != 1) { vector<int>em; return em; }//Returns an empty vector if there is no shortest path
 
     int c = 0,s=0;
-    vector<int> res;//결과저장
+    vector<int> res;//Save result
     s = v1.back();
-    res.push_back(v.back());//최종도착지 res에 넣기
+    res.push_back(v.back());//put in final destination res
     c = v.back();
-    length = length + FindVertex(s)->FindEdge(c)->GetWeight();//경로 비용 추가
-    while (c!=startVertexKey) {//거꾸로 이동
+    length = length + FindVertex(s)->FindEdge(c)->GetWeight();
+    while (c!=startVertexKey) {
         c = v.back();
-        if (s == c) {//출발지가 다른 도착지와 같다면(경로 만들어진다)
+        if (s == c) {//If the origin is the same as the destination (a route is created)
             s = v1.back();
             if (s != c) {
                 res.push_back(c);
-                length = length + FindVertex(s)->FindEdge(c)->GetWeight(); //경로 비용 추가
+                length = length + FindVertex(s)->FindEdge(c)->GetWeight(); 
             }
-            if (s == startVertexKey) {//원래 출발지 까지 왔다면
+            if (s == startVertexKey) {//If you have come to the original place of departure
                 res.push_back(s);
                 break;
             }
@@ -170,7 +170,7 @@ std::vector<int> Graph::FindPathBfs(int startVertexKey, int endVertexKey) {
         v1.pop_back();
         v.pop_back();
     }
-    res.push_back(length);//맨뒤에는 비용, 위에서부터 앞으로 하면 경로됨
+    res.push_back(length);
 
     return res;
 }
