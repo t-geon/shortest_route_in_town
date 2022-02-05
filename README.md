@@ -36,14 +36,14 @@ Since 3->5 is the last, we need to find the edge that reaches 3 while going back
 ---------------------------------------------------------------------
 
 2. DIJKSTRA (set)
- 
- 다익스트라 알고리즘은 다이나믹 프로그래밍을 활용한 최단경로 탐색 알고리즘으로 가장 많이 사용되는 알고리즘 중 하나이다.    
- 다익스트라 알고리즘에서 하나의 최단거리는 여러 개의 최단거리로 이루어질 수 있다.    
- 때문에 이전까지 구한 최단 거리 정보를 그대로 사용한다는 특징이 있다.
+
+Dijkstra algorithm is one of the most used algorithms for the shortest path search using dynamic programming.    
+In Dijkstra algorithm, one shortest distance can consist of several shortest distances.   
+Therefore, it has the characteristic of using the shortest distance information obtained before as it is.
  
    ![image](https://user-images.githubusercontent.com/88877637/149550039-1fea5af6-562b-4a61-8347-4959468fc2e1.png)
    
-example) 위와 같은 그래프에서 1에서 2로가는 최단거리를 구해보자    
+example) Let's find the shortest distance from 1 to 2 in the graph above.    
 - 길이를 저장하는 배열에 IN_FINITY를 모두 초기화 시킨다    
 - 비용을 first로 하고 도착지를 second로 하는 pair를 set에 넣고 시작한다.    
 -> 즉 출발지인 1을 넣을 때는 비용은 0이고 도착지는 1이다.    
