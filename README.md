@@ -62,14 +62,14 @@ example) Let's find the shortest distance from 1 to 2 in the graph above.
 
 ---------------------------------------------------------------------
 
-3. DIJKSTRA (minheap)
+3. DIJKSTRAMIN (minheap)
 
-DIJKSTRAMIN performs the same function as DIJKSTRA.
-DIJKSTRA sorts through set, and DIJKSTRAMIN sorts through min heap.
+DIJKSTRAMIN performs the same function as DIJKSTRA.    
+DIJKSTRA sorts through set, and DIJKSTRAMIN sorts through min heap.    
 
 ![image](https://user-images.githubusercontent.com/88877637/149550039-1fea5af6-562b-4a61-8347-4959468fc2e1.png)
 
-example) I will explain with the same example as in DIJKSTRA. (1->2 shortest distance)
+example) I will explain with the same example as in DIJKSTRA. (1->2 shortest distance)    
 - 길이를 저장하는 배열에 IN_FINITY를 모두 초기화한다    
 - 비용을 첫번째 인자, 도착지를 두번째 인자로 push를 이용해 min heap에 넣고 시작한다.(출발지인 1을 넣을 때는 비용은 0이고 도착지는 1이다.)     
 - 총 min heap이 빌 때까지 반복하며 중간에 도착지가 나오면 반복을 종료한다.     
