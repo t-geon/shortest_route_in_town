@@ -213,9 +213,9 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
         }
     }
 
-    vector<int> v;//최단 경로 저장
-    //경로가 없을 때
-    if (endnum != 1) { cout << "경로가 없다" << endl; vector<int> b; return b;}
+    vector<int> v;
+
+    if (endnum != 1) { cout << "no path" << endl; vector<int> b; return b;}
     else {
         int index = endVertexKey;
         //cout << endVertexKey;
@@ -237,47 +237,46 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
 }
 
 
-/// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
+// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
 std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey) {
-    int* length = new int[m_vSize];//비용 저장
-    int* prev_vertex = new int[m_vSize];//최단 경로 저장
+    int* length = new int[m_vSize];//save cost
+    int* prev_vertex = new int[m_vSize];
     int endnum = 0,dump=0;
 
-    fill(length, length + m_vSize, IN_FINITY);//length전부 IN_FINITY로 저장
+    fill(length, length + m_vSize, IN_FINITY);
 
-    MinHeap<int, int> h;//first는 비용, second는 도착지
-    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();//시작 vertex에 인접해있는 vertex중 첫번째 edge, cure에 저장
+    MinHeap<int, int> h;
+    Edge* cure = FindVertex(startVertexKey)->GetHeadOfEdge();
 
-
-    //출발지 넣어주기
+    //enter the starting point
     h.Push(0, startVertexKey);
-    length[startVertexKey] = 0;//시작점 거리
+    length[startVertexKey] = 0;//starting point distance
 
     while (!h.IsEmpty()) {
-        int n = h.Top().second;//최소비용인 vetext 가져오기
-        h.Pop();//최소 값 지우기
-        if (n == endVertexKey) { endnum = 1; break; }//도착지까지 최단경로가 나온면 끝
+        int n = h.Top().second;//Get vetext at the lowest cost
+        h.Pop();//pop Minimum Value
+        if (n == endVertexKey) { endnum = 1; break; }//If the shortest route to the destination is found, it is over.
 
-        cure = FindVertex(n)->GetHeadOfEdge();//cure에 이동한 vertex의 첫번째 edge 저장      
+        cure = FindVertex(n)->GetHeadOfEdge();//Save the first edge of the vertex moved to cure
 
         while (cure != NULL) {
             int next = cure->GetKey();
             int weight = cure->GetWeight();
 
-            if (length[next] > length[n] + weight) {//원래 저장된 거리보다 n을 거쳐갈 때 더 짧으면
-                if (length[next] != IN_FINITY) { dump=1; }// 이미 heap에 있는 경로에서 더 짧은 경로가 나왔을 때 dump=1
+            if (length[next] > length[n] + weight) {//If traversing n is shorter than the original distance,
+                if (length[next] != IN_FINITY) { dump=1; }// dump=1 for shorter path
                 length[next] = length[n] + weight;
                 prev_vertex[next] = n;
-                if (dump == 1) { h.DecKey(next, length[next]); dump = 0; }//더 짧은 경로를 찾았을 때
+                if (dump == 1) { h.DecKey(next, length[next]); dump = 0; }
                 else { h.Push(length[next], next); }
             }
-            cure = cure->GetNext();//다음 경로
+            cure = cure->GetNext();
         }
     }
 
-    vector<int> v;//최단 경로 저장
-    //경로가 없을 때
-    if (endnum != 1) { cout << "경로가 없다" << endl; vector<int> b; return b; }
+    vector<int> v;//save shortest path
+    
+    if (endnum != 1) { cout << "no path" << endl; vector<int> b; return b; }
     else {
         int index = endVertexKey;
         //cout << endVertexKey;
@@ -293,7 +292,6 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey,
             index = prev_vertex[index];
         }
     }
-    //cout <<endl<< length[endVertexKey] << endl;
     v.push_back(length[endVertexKey]);
     return v;
 }
