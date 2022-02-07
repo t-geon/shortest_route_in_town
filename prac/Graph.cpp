@@ -296,35 +296,35 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey,
     return v;
 }
 
-/// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
+// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
 std::vector<int> Graph::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey) {
     int* d = new int[m_vSize];
-    fill(d, d + m_vSize, IN_FINITY);//d 전부 IN_FINITY로 저장
+    fill(d, d + m_vSize, IN_FINITY);
     int* p = new int[m_vSize];
-    fill(p,p + m_vSize, -1);//p전부 -1로 저장
+    fill(p,p + m_vSize, -1);//Save all p as -1
 
-    d[startVertexKey] = 0;//시작지 0으로 초기화
+    d[startVertexKey] = 0;
 
-    Vertex* curv = m_pVHead;//시작 vertex 저장
-    Edge* cure = curv->GetHeadOfEdge();//시작 vertex의 첫번째 edge저장
+    Vertex* curv = m_pVHead;
+    Edge* cure = curv->GetHeadOfEdge();
     for (int z = 0; z < m_vSize - 1; z++) {
-        curv = m_pVHead;//시작 vertex 저장
-        for (int i = 0; i < m_vSize; i++) {//모든 vertex반복
-            cure = curv->GetHeadOfEdge();//시작 vertex의 첫번째 edge저장
-            if (d[curv->GetKey()] != IN_FINITY) {//방문했던 곳이면 확인
-                while (cure != NULL) {//하나의 vertex의 인접 vertex방문
-                    int v = cure->GetKey();//도착지
-                    int weight = cure->GetWeight();//비용
-                    int w = curv->GetKey();//출발지
+        curv = m_pVHead;
+        for (int i = 0; i < m_vSize; i++) {//repeat all vertices
+            cure = curv->GetHeadOfEdge();
+            if (d[curv->GetKey()] != IN_FINITY) {
+                while (cure != NULL) {//Visiting adjacent vertices
+                    int v = cure->GetKey();
+                    int weight = cure->GetWeight();
+                    int w = curv->GetKey();
 
-                    if (d[v] > d[w] + weight) {//경유해서 가는 경우가 비용이 적으면
-                        d[v] = d[w] + weight;//비용 갱신
-                        p[v] = w;//비용이 갱신되었다면 도착지의 이전 vertex를 p에 저장
+                    if (d[v] > d[w] + weight) {
+                        d[v] = d[w] + weight;
+                        p[v] = w;
                     }
-                    cure = cure->GetNext();//다음 edge
+                    cure = cure->GetNext();
                 }
             }
-            curv = curv->GetNext();//다음 vertex
+            curv = curv->GetNext();
         }
     }
     
