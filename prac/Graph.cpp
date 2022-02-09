@@ -366,16 +366,16 @@ std::vector<vector<int> > Graph::FindShortestPathFloyd() {
     //initialization
     for (int i = 0; i < m_vSize; i++) {
         for (int j = 0; j < m_vSize; j++) {
-            if (i == j) { a[i][j]=0; }//자기 자신에게 가는 것은 0
+            if (i == j) { a[i][j]=0; }//going to oneself is 0
             else { a[i][j] = IN_FINITY; }
         }
     }
 
-    Vertex* curv = m_pVHead;//head vertex에서 시작
-    while (curv != NULL) {//vertex 출력
-        Edge* cure = curv->GetHeadOfEdge();//도착 vertex가 i인 edge찾기
+    Vertex* curv = m_pVHead;
+    while (curv != NULL) {
+        Edge* cure = curv->GetHeadOfEdge();
         while (cure != NULL) {
-            a[curv->GetKey()][cure->GetKey()] = cure->GetWeight();//a[출발정점][도착정점]=비용
+            a[curv->GetKey()][cure->GetKey()] = cure->GetWeight();//a[departure vertex][arrival vertex] = cost
             cure = cure->GetNext();
         }
         curv = curv->GetNext();
@@ -383,15 +383,15 @@ std::vector<vector<int> > Graph::FindShortestPathFloyd() {
 
 
     for (int k = 0; k < m_vSize; k++) {
-        for (int i = 0; i < m_vSize; i++) {//모든 vertex반복
+        for (int i = 0; i < m_vSize; i++) {
             for (int j = 0; j < m_vSize; j++) {
                 if (a[i][j] > a[i][k] + a[k][j]) { a[i][j] = a[i][k] + a[k][j]; }
             }
         }
     }
  
-    for (int i = 0; i < m_vSize; i++) {//음수 사이클 확인하는 반복문
-        if (a[i][i] < 0) { vector<vector<int>> s; return s; }//자기 자신으로 가는 값이 음수가 되면 음수사이클 생긴 것
+    for (int i = 0; i < m_vSize; i++) {
+        if (a[i][i] < 0) { vector<vector<int>> s; return s; }//A negative cycle occurs when the value going to itself becomes negative.
     }
     
     return a;
