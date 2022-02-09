@@ -329,21 +329,21 @@ std::vector<int> Graph::FindShortestPathBellmanFord(int startVertexKey, int endV
     }
     
     curv = m_pVHead;
-    for (int i = 0; i < m_vSize; i++) {//모든 vertex반복
+    for (int i = 0; i < m_vSize; i++) {
         cure = curv->GetHeadOfEdge();
-        if (d[curv->GetKey()] != IN_FINITY) {//방문했던 곳이면 확인
-            while (cure != NULL) {//하나의 vertex의 인접 vertex방문
-                int v = cure->GetKey();//도착지
-                int weight = cure->GetWeight();//비용
-                int w = curv->GetKey();//출발지
+        if (d[curv->GetKey()] != IN_FINITY) {
+            while (cure != NULL) {
+                int v = cure->GetKey();
+                int weight = cure->GetWeight();
+                int w = curv->GetKey();
 
-                if (d[v] > d[w] + weight) {//n-1번 하고 난 뒤에 경로변화가 있는경우(음수싸이클)
-                    vector<int> b; return b;//빈 vector반환
+                if (d[v] > d[w] + weight) {//When there is a path change after n-1 iterations (negative cycle)
+                    vector<int> b; return b;//return empty vector
                 }
-                cure = cure->GetNext();//다음 edge
+                cure = cure->GetNext();
             }
         }
-        curv = curv->GetNext();//다음 vertex
+        curv = curv->GetNext();
     }
     
     vector<int> v;
