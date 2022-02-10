@@ -127,7 +127,8 @@ void Manager::Run(const char* filepath)
         else if (!strcmp(cmd, "BELLMANFORD")) {
             cout << "========BELLMANFORD========" << endl << endl;
             fout << "========BELLMANFORD========" << endl << endl;
-            //명령어 인자부족
+            
+            //Insufficient command arguments
             if (!strcmp(tmp, "")) { fout << "VertexKeyNotExist" << endl; cout << "VertexKeyNotExist" << endl; re = VertexKeyNotExist;}
             else {
                 strtok_s(tmp, " ", &tmm);
@@ -214,10 +215,7 @@ void Manager::Run(const char* filepath)
     }
     fin.close();
     return;
-
-
 }
-
 
 void Manager::PrintError(Result result)
 {
@@ -225,9 +223,7 @@ void Manager::PrintError(Result result)
         << "Error code: " << result << endl << endl << "=====================" << endl << endl;
     fout << endl << "=====================" << endl << endl << endl << "=====================" << endl << endl
         << "Error code: " << result << endl << endl << "=====================" << endl << endl;
-    
 }
-
 
 // <summary>
 // make a graph
@@ -248,7 +244,7 @@ Result Manager::Load(const char* filepath)
     if (!fi) {return LoadFileNotExist; }
 
     int vnum = 0, gsize = 0;
-    string name, store,ns1;//가게, 주인, 간판 이름저장
+    string name, store,ns1;//Store, owner, signboard name
 
     //read first line
     char cmd1[100];
@@ -261,13 +257,13 @@ Result Manager::Load(const char* filepath)
         fi.getline(cmd1, 100);//Read 1 line of command.txt
         if (!strcmp(cmd1, "")) { continue; }//Code to repeat the number of lines
         char* tmp1, * tmm1, * cmp2;
-        strtok_s(cmd1, "/", &tmp1);//cmd1는 /앞 문자열(주인이름,간판) tmp는 /뒤 문자열(비용)
+        strtok_s(cmd1, "/", &tmp1);//cmd1 is the string before / (owner name, sign) tmp is the string after / (cost)
         
         ns1 = string(cmd1);
         ns1.erase(ns1.size() - 1, 1);
-        strtok_s(cmd1, "'", &cmp2);//cmd1는 이름, cmp1은 s 간판명
+        strtok_s(cmd1, "'", &cmp2);//cmd1 is the name, cmp1 is the s sign name
         name = string(cmd1);
-        strtok_s(cmp2, " ", &cmp2);//cmp1은 간판명
+        strtok_s(cmp2, " ", &cmp2);//cmp1 is the sign name
         store = string(cmp2);
 
         m_graph.AddVertex(vnum);//vertex 삽입
