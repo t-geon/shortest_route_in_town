@@ -22,15 +22,12 @@ private:
     int m_vSize;
 
 public:
-    // constructor
-    Graph();
-    // destructor
-    ~Graph();
+    Graph();    // constructor
+    ~Graph();   // destructor
 
     void AddName(int vertexKey, string name);//add name function
     void Addstore(int vertexKey, string store);//add name function
     Vertex* head() { return m_pVHead; };
-
 
     // add vertex with vertexNum at the end of the linked list for the vertics
     void AddVertex(int vertexKey);
