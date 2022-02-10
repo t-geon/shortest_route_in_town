@@ -27,7 +27,7 @@ void Manager::Run(const char* filepath)
     {
         fin.getline(cmd, 32);//Read 1 line of command.txt
         if (!strcmp(cmd, "")) { continue; }//Code to repeat the number of lines
-        else if (cmd[0] == '/' && cmd[1] == '/') { continue; }// "//"이면 명령어 안 읽는다
+        else if (cmd[0] == '/' && cmd[1] == '/') { continue; }// "If it is "//", the command is not read.
         char* tmp, * tmm;
         strtok_s(cmd, " ", &tmp);//Saved in the character cmd in front of the "" standard, and the remaining characters in the address of tmp
         
@@ -66,7 +66,8 @@ void Manager::Run(const char* filepath)
         else if (!strcmp(cmd, "BFS")) {
             cout << "========BFS========" << endl<<endl;
             fout << "========BFS========" << endl << endl;
-            //명령어 인자부족
+            
+            //Insufficient command arguments
             if (!strcmp(tmp,"")) { fout << "VertexKeyNotExist"  << endl; cout << "VertexKeyNotExist" << endl;re= VertexKeyNotExist;}
             else {
                 strtok_s(tmp, " ", &tmm);
@@ -86,7 +87,7 @@ void Manager::Run(const char* filepath)
             cout << "========DIJKSTRA========" << endl << endl;
             fout << "========DIJKSTRA========" << endl << endl;
             
-            //명령어 인자부족
+            //Insufficient command arguments
             if (!strcmp(tmp, "")) { fout << "VertexKeyNotExist" << endl; cout << "VertexKeyNotExist" << endl; re = VertexKeyNotExist;
             }
             else {
@@ -106,7 +107,8 @@ void Manager::Run(const char* filepath)
         else if (!strcmp(cmd, "DIJKSTRAMIN")) {
             cout << "========DIJKSTRAMIN========" << endl << endl;
             fout << "========DIJKSTRAMIN========" << endl << endl;
-            //명령어 인자부족
+            
+            //Insufficient command arguments
             if (!strcmp(tmp, "")) { fout << "VertexKeyNotExist" << endl; cout << "VertexKeyNotExist" << endl; re = VertexKeyNotExist;}
             else {
                 strtok_s(tmp, " ", &tmm);
@@ -153,7 +155,8 @@ void Manager::Run(const char* filepath)
         //select CONFIG
         else if (!strcmp(cmd, "CONFIG")) {
             cout << "========CONFIG LOG========" << endl<<endl;
-            //전달된 인자가 부족할 때
+            
+            //Insufficient command arguments
             if (!strcmp(tmp, "")) { fout << "InvalidOptionName" << endl; cout << "InvalidOptionName" << endl; re = InvalidOptionName; }
             else {
                 tmp = strtok_s(tmp, " ", &tmm);
