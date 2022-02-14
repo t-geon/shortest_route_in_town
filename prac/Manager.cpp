@@ -362,23 +362,21 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
     if (m_graph.IsNegativeEdge() == 1) { return InvalidAlgorithm; }
     if (m_graph.FindVertex(startVertexKey) == NULL || m_graph.FindVertex(endVertexKey) == NULL) { return InvalidVertexKey; }
     vector<int> v = m_graph.FindShortestPathDijkstraUsingSet(startVertexKey, endVertexKey);
-    if (v.size() == 0) { fout << "최단 경로가 없다" << endl; cout << "최단 경로가 없다" << endl; return InvalidAlgorithm; }
-    //최단경로가 없을 때 에러가 없어서 임의로 넣음
+    if (v.size() == 0) { fout << "there is no shortest path" << endl; cout << "there is no shortest path" << endl; return InvalidAlgorithm; }
     else {
         int length = v.back();
         v.pop_back();
         fout << "shortest path: "; cout << "shortest path: ";
-        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//뒤에서 부터 출력하면 경로됨
+        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }
 
         int* vv = &v[0];
         sort(con, vv, v.size());
 
         fout << endl << "path length: " << length << endl;
         cout << endl << "path length: " << length << endl;
-        //course부분 출력
-        compression(v);//v에는 최단경로 순으로 저장되어있다.
+
+        compression(v);
     }
-    
     return Success;
 }
 
@@ -404,24 +402,22 @@ Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int end
     if (m_graph.FindVertex(startVertexKey) == NULL || m_graph.FindVertex(endVertexKey) == NULL) { return InvalidVertexKey; }
     
     vector<int> v = m_graph.FindShortestPathDijkstraUsingMinHeap(startVertexKey, endVertexKey);
-    if (v.size() == 0) { fout << "최단 경로가 없다" << endl; cout << "최단 경로가 없다" << endl; return InvalidAlgorithm; }
-    //최단경로가 없을 때 에러가 없어서 임의로 넣음
+    if (v.size() == 0) { fout << "there is no shortest path" << endl; cout << "there is no shortest path" << endl; return InvalidAlgorithm; }
     else {
         int length = v.back();
         v.pop_back();
         fout << "shortest path: ";
         cout << "shortest path: ";
-        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//뒤에서 부터 출력하면 경로됨
+        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }
 
         int* vv = &v[0];
         sort(con, vv, v.size());
 
         fout << endl << "path length: " << length << endl;
         cout << endl << "path length: " << length << endl;
-        //course부분 출력
-        compression(v);//v에는 최단경로 순으로 저장되어있다.
+        
+        compression(v);
     }
-
     return Success;
 }
 
