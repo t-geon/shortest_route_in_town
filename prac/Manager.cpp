@@ -4,7 +4,6 @@ Manager::~Manager()
 {
     if (fout.is_open())
         fout.close();
-
 }
 
 void Manager::Run(const char* filepath)
@@ -266,14 +265,14 @@ Result Manager::Load(const char* filepath)
         strtok_s(cmp2, " ", &cmp2);//cmp1 is the sign name
         store = string(cmp2);
 
-        m_graph.AddVertex(vnum);//vertex 삽입
-        m_graph.FindVertex(vnum)->ns = ns1;//간판명 저장
-        m_graph.AddName(vnum, name);//name 저장
-        m_graph.Addstore(vnum, store);//store 저장
+        m_graph.AddVertex(vnum);
+        m_graph.FindVertex(vnum)->ns = ns1;//Save sign name
+        m_graph.AddName(vnum, name);//save name
+        m_graph.Addstore(vnum, store);
 
-        for (int i = 0; i < gsize; i++) {//edge추가
-            tmm1 = strtok_s(tmp1, " ", &tmp1);//tmm는 " "앞 문자열 tmp는 " "뒤 문자열
-            if (stoi(tmm1) != 0) { m_graph.AddEdge(vnum, i, stoi(tmm1)); }//vnum번째 vertex에 edge추가
+        for (int i = 0; i < gsize; i++) {//add edge
+            tmm1 = strtok_s(tmp1, " ", &tmp1);//tmm is the string before " " tmp is the string after " "
+            if (stoi(tmm1) != 0) { m_graph.AddEdge(vnum, i, stoi(tmm1)); }//Add edge to vnumth vertex
         }
         vnum += 1;
     }
