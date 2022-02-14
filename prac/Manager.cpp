@@ -438,27 +438,26 @@ Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int end
 // </returns>
 Result Manager::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey)
 {
-
     if (m_graph.head() == NULL) { return GraphNotExist; }
     if (m_graph.FindVertex(startVertexKey) == NULL || m_graph.FindVertex(endVertexKey) == NULL) { return InvalidVertexKey; }
     
     vector<int> v = m_graph.FindShortestPathBellmanFord(startVertexKey, endVertexKey);
-    if (v.size() == 0) { return NegativeCycleDetected; } //음수 weight인 싸이클이 있나 확인
+    if (v.size() == 0) { return NegativeCycleDetected; } //Check if there are cycles with negative weights
     
     else {
         int length = v.back();
         v.pop_back();
         fout << "shortest path: ";
         cout << "shortest path: ";
-        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }//뒤에서 부터 출력하면 경로됨
+        for (int i = v.size() - 1; i >= 0; i--) { fout << v[i] << " "; cout << v[i] << " "; }
 
         int* vv = &v[0];
         sort(con, vv,v.size());
         
         fout << endl << "path length: " << length << endl;
         cout << endl << "path length: " << length << endl;
-        //course부분 출력
-        compression(v);//v에는 최단경로 순으로 저장되어있다.
+
+        compression(v);
     }
     return Success;
 }
@@ -483,33 +482,32 @@ Result Manager::RabinKarpCompare(string ComparedString, string CompareString)
     int bs = ComparedString.length(), bh = 0;//big length,big hash=0
     int ws = CompareString.length(), wh = 0;//word length, word hash=0
     int power = 1, power_prev = 1, find = 0;
-    for (int i = 0; i <= bs - ws; i++) {//큰 문자열 크기- 찾는 단어크기 만큼 반복
+    for (int i = 0; i <= bs - ws; i++) {//Large string size - repeat as many words as you find
         if (i == 0) {
             for (int k = 1; k <= ws; k++) {
-                bh = bh + ComparedString[ws - k] * power;//word의 크기만큼 뒤에서 앞으로 오면서 더하기
-                wh = wh + CompareString[ws - k] * power;//word도 뒤에서 앞으로 더하기
+                bh = bh + ComparedString[ws - k] * power;//Add from back to front by the size of a word
+                wh = wh + CompareString[ws - k] * power;//Add word from back to front
                 if (k < ws) { power = power * 2; }
             }
         }
         else {
-            bh = (bh - ComparedString[i - 1] * power) * 2 + ComparedString[i - 1 + ws];//이전꺼 빼주고 다음꺼 더하기
+            bh = (bh - ComparedString[i - 1] * power) * 2 + ComparedString[i - 1 + ws];//Subtract the previous one and add the next one
         }
         if (bh == wh) {
             for (int q = 0; q < ws; q++) {
                 if (ComparedString[i + q] != CompareString[q]) { find = 0; break; }
-                else { find += 1; }//같으면 1을 더해준다.
+                else { find += 1; }//If equal, add 1.
             }
             if (find != 0) {
                 return Success;
             }
         }
     }
-    return LoadFileNotExist;//찾는 것이 없을  반환 하는 오류가 없어서 LoadFileNotExist로 대신했다.
+    return LoadFileNotExist;//LoadFileNotExist error occurs when nothing is found
 }
 
 
 Result Manager::Update() {
-     //1. 주인 이름 5개 이상 같은 가게(소수점 올림을 10%에서 하고 뺐다.)
     int len1 = 0,  col = 0;
     int m_vSize = m_graph.Size();
     double data = 0, de = 0;
