@@ -70,11 +70,12 @@ DIJKSTRA sorts through set, and DIJKSTRAMIN sorts through min heap.
 ![image](https://user-images.githubusercontent.com/88877637/149550039-1fea5af6-562b-4a61-8347-4959468fc2e1.png)
 
 example) I will explain with the same example as in DIJKSTRA. (1->2 shortest distance)    
-- 길이를 저장하는 배열에 IN_FINITY를 모두 초기화한다    
-- 비용을 첫번째 인자, 도착지를 두번째 인자로 push를 이용해 min heap에 넣고 시작한다.(출발지인 1을 넣을 때는 비용은 0이고 도착지는 1이다.)     
-- 총 min heap이 빌 때까지 반복하며 중간에 도착지가 나오면 반복을 종료한다.     
-- 첫번째 요소가 min heap에서 나오면서 1에 인접한 vertex로의 원래 비용과 경유하는 비용을 계산해 더 작은 값을 vertex와 함께 min heap에 넣어준다    
--> 즉 2,3,4가 들어간다. 이때 prev_vertex에 어디에서 이동한 것인지 저장한다. (1이 저장된다.)    
+- Initialize all length-storing arrays with IN_FINITY    
+- Start by putting the cost as the first argument and the destination as the second argument into the min heap using push.    
+-> (If you enter 1 for the origin, the cost is 0 and the destination is 1.)    
+- It repeats until the min heap is empty, and the iteration ends when a destination is reached in the middle.   
+- As the first element comes out of the min heap, it calculates the original cost to and through the vertex adjacent to 1, and puts the smaller value into the min heap together with the vertex.    
+-> 2, 3, 4 are entered. At this time, it stores where it was moved in prev_vertex. (1 is stored.)    
 - min heap은 push할 때 key값에 따라 정렬되기 때문에 2,3,4로 가는 비용 중 가장 작은 4로 이동하면서 min heap에서 지워지고 4에서 6으로 이동하는 경로가 min heap에 들어간다.    
 - 이때 1에서 2로 이동하는 경로가 최소가 된다. min heap에서 2로 이동하는 경로를 뺀다.    
 - 나온 값이 도착지점과 같기 때문에 끝난다.    
