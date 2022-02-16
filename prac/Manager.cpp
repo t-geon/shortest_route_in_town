@@ -512,27 +512,27 @@ Result Manager::Update() {
     int m_vSize = m_graph.Size();
     double data = 0, de = 0;
     string a1, b1, temp;
-    Vertex* curv = m_graph.head();//head vertex에서 시작
-    if (curv == NULL) { return FaildtoUpdatePath; }//비교할 값이 없으면 끝
+    Vertex* curv = m_graph.head();//start at head vertex
+    if (curv == NULL) { return FaildtoUpdatePath; }//If there is no value to compare
     Vertex* cmpv = m_graph.head()->GetNext();
-    if (cmpv == NULL) { return Success; }//업데이트 할게 없으면 끝난다.
+    if (cmpv == NULL) { return Success; }  
 
-    for (int i = 0; i < m_vSize - 1; i++) {//기준 vertex
-        for (int j = i + 1; j < m_vSize; j++) {//비교될 vertex
-            a1 = curv->GetName(); //curv의 주인이름
-            b1 = cmpv->GetName(); //cmpv의 주인이름
-            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//문자열 전체 소문자로 바꾸기(대소문자 구분x)
-            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//문자열 전체 소문자로 바꾸기(대소문자 구분x)
-            len1 = a1.length(); //curv의 주인이름 길이
+    for (int i = 0; i < m_vSize - 1; i++) {//standard vertex
+        for (int j = i + 1; j < m_vSize; j++) {//vertices to be compared
+            a1 = curv->GetName(); //curv's owner name
+            b1 = cmpv->GetName(); //cmpv owner name
+            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//Convert entire string to lowercase (case sensitive x)
+            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//Convert entire string to lowercase (case sensitive x)
+            len1 = a1.length(); //length of curv's hostname
             col = 0;
             
             for (int l = 0; len1-l>=5; l++) {
-                temp = a1.substr(l, 5);//a1의 l번째 부터 5글자 temp에 저장 
-                if (Success == RabinKarpCompare(b1, temp)) {//temp와 b1을 비교
-                    if (curv->FindEdge(j) != NULL) {//curv의 edge에 j로가는 edge가 있다면 수정
-                        data = curv->FindEdge(j)->GetWeight();//weight double형으로 바꿈
-                        if (curv->FindprevEdge(j) != NULL) {//head가 아닐 때 삭제하는 edge의 앞 뒤 연결
-                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//삭제되는 edge전것과 삭제되는 edge 다음 것을 연결
+                temp = a1.substr(l, 5);//Stored in temp for 5 characters from the lth of a1
+                if (Success == RabinKarpCompare(b1, temp)) {//compare temp and b1
+                    if (curv->FindEdge(j) != NULL) {//Fix if the edge of the curv has an edge going to j
+                        data = curv->FindEdge(j)->GetWeight();//Convert to weight double
+                        if (curv->FindprevEdge(j) != NULL) {//Concatenate before and after the edge to be deleted when it is not the head
+                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//Connecting the front and back of the edge to be deleted
                         }
                         else {//head일 때 head 바꿔주기
                             curv->sethead(curv->GetHeadOfEdge()->GetNext());
