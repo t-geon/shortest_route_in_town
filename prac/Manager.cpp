@@ -568,55 +568,55 @@ Result Manager::Update() {
 
 
     //2. If the name is the same 10 characters after applying 1
-    curv = m_graph.head();//head vertex에서 시작
+    curv = m_graph.head();
     cmpv = m_graph.head()->GetNext();
 
-    for (int i = 0; i < m_vSize - 1; i++) {//기준 vertex
-        for (int j = i + 1; j < m_vSize; j++) {//비교될 vertex
-            a1 = curv->GetName(); //curv의 주인이름
-            b1 = cmpv->GetName(); //cmpv의 주인이름
-            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);//문자열 전체 소문자로 바꾸기(대소문자 구분x)
-            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);//문자열 전체 소문자로 바꾸기(대소문자 구분x)
-            len1 = a1.length(); //curv의 주인이름 길이
+    for (int i = 0; i < m_vSize - 1; i++) {
+        for (int j = i + 1; j < m_vSize; j++) {
+            a1 = curv->GetName();
+            b1 = cmpv->GetName();
+            transform(a1.begin(), a1.end(), a1.begin(), ::tolower);
+            transform(b1.begin(), b1.end(), b1.begin(), ::tolower);
+            len1 = a1.length(); 
             col = 0;
 
             for (int l = 0; len1 - l >= 10; l++) {
-                temp = a1.substr(l, 10);//a1의 l번째 부터 5글자 temp에 저장
-                if (Success==RabinKarpCompare(b1, temp)) {//temp와 b1을 비교
-                    if (curv->FindEdge(j) != NULL) {//curv의 edge에 j로가는 edge가 있다면 수정
-                        data = curv->FindEdge(j)->GetWeight();//weight double형으로 바꿈
-                        if (curv->FindprevEdge(j) != NULL) {//head가 아닐 때 삭제하는 edge의 앞 뒤 연결
-                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());//삭제되는 edge전것과 삭제되는 edge 다음 것을 연결
+                temp = a1.substr(l, 10);
+                if (Success==RabinKarpCompare(b1, temp)) {
+                    if (curv->FindEdge(j) != NULL) {
+                        data = curv->FindEdge(j)->GetWeight();
+                        if (curv->FindprevEdge(j) != NULL) {
+                            curv->FindprevEdge(j)->SetNext(curv->FindEdge(j)->GetNext());
                         }
-                        else {//head일 때 head 바꿔주기
+                        else {
                             curv->sethead(curv->GetHeadOfEdge()->GetNext());
                         }
-                        delete curv->FindEdge(j);//edge삭제
-                        curv->sizedown();//size 1 감소
-                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.9)); }//data가 양수일 때 새로운 edge생성
-                        else if (data < 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 1.1)); }//data가 음수일 때 새로운 edge생성
-                        col = 1;//같은 문자가 있으면 vertex를 넘어가야한다(같은 문자열에서 또 같을 수도 있어서)
+                        delete curv->FindEdge(j);
+                        curv->sizedown();
+                        if (data > 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 0.9)); }
+                        else if (data < 0) { curv->AddEdge(cmpv->GetKey(), ceil(data * 1.1)); }
+                        col = 1;
                     }
-                    if (cmpv->FindEdge(i) != NULL) {//cmpv의 edge에 i로가는 edge가 있다면 수정
-                        data = cmpv->FindEdge(i)->GetWeight();//weight double형으로 바꿈
-                        if (cmpv->FindprevEdge(i) != NULL) {//head가 아닐 때 삭제하는 edge의 앞 뒤 연결
-                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());//삭제되는 edge전것과 삭제되는 edge 다음 것을 연결
+                    if (cmpv->FindEdge(i) != NULL) {
+                        data = cmpv->FindEdge(i)->GetWeight();
+                        if (cmpv->FindprevEdge(i) != NULL) {
+                            cmpv->FindprevEdge(i)->SetNext(cmpv->FindEdge(i)->GetNext());
                         }
-                        else {//head일 때 head 바꿔주기
+                        else {
                             cmpv->sethead(cmpv->GetHeadOfEdge()->GetNext());
                         }
-                        delete cmpv->FindEdge(i);//edge삭제
-                        cmpv->sizedown();//size 1 감소
-                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.9)); }//data가 양수일 때 새로운 edge생성
-                        else if (data < 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 1.1)); }//data가 음수일 때 새로운 edge생성
-                        col = 1;//같은 문자가 있으면 vertex를 넘어가야한다(같은 문자열에서 또 같을 수도 있어서)
+                        delete cmpv->FindEdge(i);
+                        cmpv->sizedown();
+                        if (data > 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 0.9)); }
+                        else if (data < 0) { cmpv->AddEdge(curv->GetKey(), ceil(data * 1.1)); }
+                        col = 1;
                     }
-                    if (col == 1) { break; }//다음 vertex
+                    if (col == 1) { break; }
                 }
             }
-            cmpv = cmpv->GetNext(); //비교하는 vertex 이동
+            cmpv = cmpv->GetNext();
         }
-        curv = curv->GetNext();//기준 vertex 이동
+        curv = curv->GetNext();
         cmpv = curv->GetNext();
     }
     
