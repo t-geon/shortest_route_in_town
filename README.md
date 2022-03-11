@@ -85,7 +85,7 @@ example) I will explain with the same example as in DIJKSTRA. (1->2 shortest dis
 
 4. BELLMANFORD
 
-모든 경로를 여러 번 계산하기 때문에 다익스트라 알고리즘에 비해서 시간이 오래 걸린다.    
+Compared to Dijkstra's algorithm, it takes longer than Dijkstra's algorithm because all paths are computed multiple times.    
 하지만 간선의 비용이 음수일 때에도 음수 사이클이 발생하지 않는다면 문제없이 사용할 수 있다는 장점이 있다.    
 벨만 포드 알고리즘은 각 정점의 값을 무한대로, 이전 위치는 -1으로 초기화한다.    
 d의 시작 정점에 0을 넣고 시작한다.    
