@@ -76,7 +76,7 @@ example) I will explain with the same example as in DIJKSTRA. (1->2 shortest dis
 - It repeats until the min heap is empty, and the iteration ends when a destination is reached in the middle.   
 - As the first element comes out of the min heap, it calculates the original cost to and through the vertex adjacent to 1, and puts the smaller value into the min heap together with the vertex.    
 -> 2, 3, 4 are entered. At this time, it stores where it was moved in prev_vertex. (1 is stored.)    
-- min heap은 push할 때 key값에 따라 정렬되기 때문에 2,3,4로 가는 비용 중 가장 작은 4로 이동하면서 min heap에서 지워지고 4에서 6으로 이동하는 경로가 min heap에 들어간다.    
+- The min heap is sorted according to the key value when pushing. Among 2, 3, and 4, move to 4, which is the minimum cost, pop from the min heap, and push the path from 4 to 6 on the min heap.
 - 이때 1에서 2로 이동하는 경로가 최소가 된다. min heap에서 2로 이동하는 경로를 뺀다.    
 - 나온 값이 도착지점과 같기 때문에 끝난다.    
 - 하나의 반복문이 끝나고 나면 prev_vertex를 확인하는 반복문을 동해 각 정점 별 최단 경로와 도착지의 최단경로를 역추적해 경로를 출력했다. 즉 1 2로 출력된다.    
