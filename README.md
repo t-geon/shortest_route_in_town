@@ -92,7 +92,7 @@ d의 시작 정점에 0을 넣고 시작한다.
 
 ![image](https://user-images.githubusercontent.com/88877637/149550100-0bc5a23c-0438-47e8-9a46-4c1475df9ea4.png)
 
-example) 위와 같은 그래프에서 1에서 3으로 가는 최단경로    
+example) In the graph above, the shortest path from 1 to 3    
 - d의 1자리를 0을 넣고 d[2]=2 d[3]=8, d[4]=1이 된다.    
 - 2에서 1으로 가는 값을 본다, d[1]에 2를 넣으려고 하지만 d[1]=0이기 때문에 넣지 못한다.    
 - 3에서는 d[6]=9, d[5]=16이 된다.     
